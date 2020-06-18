@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Live Search</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="../../" class="home-link">↩ Back</a>
+      </nav>
+      <section>
+        <heading>
+          <h1>모여봐요 동물의 숲 노래 라이브러리</h1>
+        </heading>
+      </section>
+      <section>
+        <form id="jsForm">
+          <div class="search-desc">
+            <p>자바스크립트 동적 실시간 검색</p>
+            <p>(Javascript Dynamic Live Search / Filtering)</p>
+          </div>
+          <div class="input-container">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              name="songtitle"
+              id="jsSearchInput"
+              class="search-input"
+              placeholder="노래 제목 검색..."
+              required
+            />
+          </div>
+        </form>
+      </section>
+      <hr />
+    </header>
+    <main class="main">
+      <section id="root"></section>
+    </main>
+    <div class="modal"></div>
+    <footer>
+      <hr />
+      <section>
+        <small>
+          <span>CSS 베이스: </span>
+          <a href="https://andybrewer.github.io/mvp/">MVP CSS</a>
+          <span><strong>·</strong></span>
+          <span>아이콘: </span>
+          <a href="https://fontawesome.com/">Font Awesome</a>
+          <span><strong>·</strong></span>
+          <span>데이터: </span>
+          <a href="https://hwhang0917.github.io/acnh_json/"
+            >커스텀 웹 스크래퍼</a
+          ><span><strong>·</strong></span>
+          <span>폰트: </span>
+          <a href="https://noonnu.cc/">눈누</a>
+        </small>
+      </section>
+    </footer>
+    <script src="livesearch.js"></script>
+    <script
+      src="https://kit.fontawesome.com/3b255314a2.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

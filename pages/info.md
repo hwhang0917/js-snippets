@@ -1,0 +1,24 @@
+# Javascript Snippets
+
+아래 페이지들은 특별한 라이브러리를 사용하지 않고, 바닐라 자바스크립트를 연습하여 제작한 페이지들입니다.
+
+## 바닐라 자바스크립트 연습 목록
+
+1. <h3 id="p1"> 라이브 서치 (Live Search) </h3>
+
+   불러온 데이터를 DOM element로 디스플레이, 그리고 키보드 입력 이벤트마다 DOM element들을 실시간 필터링합니다. 데이터는 파이썬을 이용하여 "모여봐요 동물의 숲"에서 K.K.의 음악 리스트를 크롤링하여 JSON으로 불러왔습니다. 기존에는 실제 RESTful API 서버를 만들어 AWS 또는 heroku 등에 배포하려 했으나, 구글 유튜브 API의 하루 Request 제한으로 인해 무산되었습니다. 결국, 실시간으로 크롤링할 필요가 없다고 판단하여 한 번만 크롤링 된 JSON 파일을 Static 페이지로 Github page를 통하여 호스팅하였습니다. <sup id="a1">[1](#f1)</sup>
+
+   - <b>시행착오:</b> 각 노래의 썸네일 클릭 시에 유튜브 영상 리스트 모달을 띄우도록 기획하였는데, JS에서 XMLHttpRequest 요청하여 외부 JSON 을 가져오는 과정이 비동기적으로 실행되어 오류가 발생하였습니다. 이를 해결하기 위하여 getSongs() 함수 내에서 addEventListener을 실행하는 함수를 콜백하여 실행하여 해결.
+   - <b>TODO: </b>
+     - [ ] 콜백 함수를 Promise 패턴으로 리팩토링
+
+2. <h3 id="p2"> 한글 단어 카운터 </h3>
+
+   현재 작업중... <br>
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio sapien, consectetur sed lacus in, luctus cursus urna. Suspendisse non enim nec diam mattis consectetur eu id sem. Fusce accumsan augue sit amet purus pharetra, sit amet lobortis dui vestibulum. Morbi accumsan diam non facilisis tempor. Cras tristique augue a risus vestibulum, eu suscipit nisl vehicula. Aenean risus diam, ullamcorper nec massa in, laoreet volutpat metus. Nulla rhoncus lectus sit amet est sodales rutrum ac sit amet diam.
+
+---
+
+## 각주
+
+<small id="f1">1</small> [ACNH JSON mock API](https://hwhang0917.github.io/acnh_json/) [↩](#a1)
