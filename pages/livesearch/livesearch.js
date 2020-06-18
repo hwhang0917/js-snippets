@@ -1,6 +1,12 @@
+console.log(YT);
+
 // DOM elements
 const jsInput = document.getElementById("jsSearchInput"),
-  jsForm = document.getElementById("jsForm");
+  jsForm = document.getElementById("jsForm"),
+  jsModal = document.getElementById("jsModal"),
+  jsSongTitle = document.getElementById("jsSongTitle"),
+  jsCloseBtn = document.getElementById("jsCloseBtn"),
+  jsModalRoot = document.getElementById("jsModalRoot");
 const root = document.getElementById("root");
 
 // Boolean
@@ -39,7 +45,8 @@ const getSongs = (callback) => {
       console.log(
         `✅ Success ${request.status}: Retrieved JSON from ${SONG_API}`
       );
-      fillSongs(JSON.parse(request.response));
+      songs = JSON.parse(request.response);
+      fillSongs(songs);
       addThumbnailClickEvent();
     } else {
       console.log(`❌ Error ${request.status}: ${request.statusText}`);
@@ -47,9 +54,6 @@ const getSongs = (callback) => {
     }
   };
 };
-
-// Creates play button
-const createPlayButton = () => {};
 
 // Creates song aside DOM element
 const createSongAside = (song) => {
@@ -105,14 +109,93 @@ const fillSongs = (songs) => {
   }
 };
 
+// Youtube iframe API
+const onYouTubeIframeAPIReady = (videoId) => {
+  new YT.Player(videoId, {
+    width: 256,
+    height: 144,
+    videoId,
+  });
+};
+
+// Create Youtube video DOM element
+const createYoutubeVideoCard = (video) => {
+  videoId = video.link.toString().split("=")[1];
+  const youtubeAside = document.createElement("aside");
+
+  // Video
+  const thumbnailFig = document.createElement("figure");
+  const videoPlayer = document.createElement("div");
+  videoPlayer.id = videoId;
+  thumbnailFig.appendChild(videoPlayer);
+
+  // Video Title
+  const videoTitle = document.createElement("p");
+  videoTitle.textContent = video["title"];
+
+  youtubeAside.appendChild(thumbnailFig);
+  youtubeAside.appendChild(videoTitle);
+
+  return youtubeAside;
+};
+
+// Populate DOM modal element with youtube videos
+const populateModal = (song) => {
+  if (!song) {
+    const noSongH2 = document.createElement("h2");
+    noSongH2.textContent = "유튜브 영상을 불러올 수 없습니다.";
+    jsModalRoot.appendChild(noSongH2);
+  } else {
+    song["youtube"].forEach((video) => {
+      let videoId = video.link.toString().split("=")[1];
+      jsModalRoot.appendChild(createYoutubeVideoCard(video));
+      onYouTubeIframeAPIReady(videoId);
+    });
+  }
+};
+
+// Clear DOM modal element
+const clearModal = () => {
+  jsModalRoot.textContent = "";
+};
+
 // Handles click event for thumbnail
 const handleThumbnailClick = (event) => {
   let songID = event.path[1].id;
+
+  // Get clicked song
+  let clickedSong = {};
+  for (let i = 0; i < songs.length; i++) {
+    if (songs[i].id === songID) {
+      clickedSong = songs[i];
+    }
+  }
+  // Set Song Tilte
+  jsSongTitle.textContent = clickedSong["kor_title"];
+
+  // Populate modal with given video
+  populateModal(clickedSong);
+
+  // Display modal
+  jsModal.style.display = "block";
+
+  // Close Button Event
+  jsCloseBtn.onclick = () => {
+    jsModal.style.display = "none";
+    clearModal();
+  };
+  // Backdrop click close event
+  window.onclick = (event) => {
+    if (event.target === jsModal) {
+      jsModal.style.display = "none";
+      clearModal();
+    }
+  };
 };
 
 // Adds click event listner for each song thumbnails
 const addThumbnailClickEvent = () => {
-  console.log("😁 Adding event listners ... ");
+  // console.log("😁 Adding event listners ... ");
   let songThumbnails = document.getElementsByClassName("song-thumbnail");
   for (let i = 0; i < songThumbnails.length; i++) {
     songThumbnails[i].addEventListener("click", handleThumbnailClick);
@@ -127,5 +210,4 @@ const init = () => {
 };
 
 // Initiate when window loaded
-// window.onload = () => init();
-init();
+window.onload = () => init();

@@ -20,7 +20,7 @@
 .input-container .search-input {
   margin: 0px 10px;
   padding: 10px;
-  width: 20vw;
+  width: 50vw;
 }
 
 .song-card {
@@ -66,4 +66,50 @@
 
 .song-thumbnail:hover > img {
   filter: brightness(50%);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding-top: 15px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__content {
+  background-color: white;
+  margin: auto;
+  padding: 10px;
+  width: 80%;
+  border-radius: 15px;
+  animation: magnifyPop 0.2s ease-in-out forwards;
+}
+
+.modal__content .close-btn {
+  color: #aaaaaa;
+  float: right;
+  text-decoration: bold;
+  font-size: 30px;
+  user-select: none;
+}
+
+.modal__content .close-btn:hover,
+.modal__content .close-btn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes magnifyPop {
+  from {
+    transform: scale(0.01);
+  }
+  to {
+    transform: scale(1);
+  }
 }
