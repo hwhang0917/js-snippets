@@ -67,7 +67,7 @@ figure {
 
 .home-link {
   color: inherit;
-  transition: 0.5s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .home-link:hover {

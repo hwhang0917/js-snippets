@@ -13,7 +13,7 @@
    - <b>시행착오:</b>
 
      - 각 노래의 썸네일 클릭 시에 유튜브 영상 리스트 모달을 띄우도록 기획하였는데, JS에서 XMLHttpRequest 요청하여 외부 JSON 을 가져오는 과정이 비동기적으로 실행되어 오류가 발생하였습니다. 이를 해결하기 위하여 getSongs() 함수 내에서 addEventListener을 실행하는 함수를 콜백하여 실행하여 해결.
-     - 유튜브 영상 iframe을 HTML 페이지에 추가하는 과정에서 Refused to display 'url' in a frame because it set 'X-Frame-Options' to 'sameorigin' 에러 발생하였습니다. 따라서 [유튜브 iframe API](https://developers.google.com/youtube/iframe_api_reference)를 참고하여서 API를 직접 import 하여서 문서에서 설명해준 예시대로 따라서 import 하였습니다.
+     - 유튜브 영상 iframe을 HTML 페이지에 추가하는 과정에서 Refused to display 'url' in a frame because it set 'X-Frame-Options' to 'sameorigin' 에러 발생하였습니다. 따라서 [유튜브 iframe API](https://developers.google.com/youtube/iframe_api_reference)를 참고하여서 API를 직접 import 하여서 문서에서 설명해준 예시대로 사용하였습니다.
 
    - <b>업데이트</b>
 
@@ -23,8 +23,18 @@
        - Favicon 추가
        - 검색창 크기 증가
 
+     - <i>0.2.0 버전</i>
+
+       - Bug Fix: 나무위키 이미지 URL 변동으로 인한 이미지 미로딩 해결
+         - 크롤링 소스를 [누키피디아](https://nookipedia.com/wiki/Main_Page)로 변경
+         - 크롤링한 이미지를 다운받아 클라우드에 저장: imgdb API 사용
+         - [imgdb](https://imgbb.com/)에 이미지를 저장하여 해당 URL로 썸네일 대체
+       - Scrapper Bug Fix: [한글 제목을 스크래핑시 오류 해결](https://github.com/hwhang0917/acnh_json/blob/dev/python/songScrapper/koreanTitleScrapper.md)
+       - 검색창 설명 삭제
+
    - <b>TODO: </b>
      - [ ] 콜백 함수들을 Promise 패턴으로 리팩토링
+     - [ ] 유튜브 링크를 flac 파일로 대체
 
 2. <h3 id="p2"> 한글 단어 카운터 </h3>
 
