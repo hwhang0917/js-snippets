@@ -32,6 +32,12 @@
        - Scrapper Bug Fix: [한글 제목을 스크래핑시 오류 해결](https://github.com/hwhang0917/acnh_json/blob/dev/python/songScrapper/koreanTitleScrapper.md)
        - 검색창 설명 삭제
 
+     - <i>0.2.1 버전</i>
+
+       - 개발로그 링크 추가
+       - 썸네일 플레이 버튼 CSS border => 텍스트로 변경
+       - [웹스크래퍼](https://hwhang0917.github.io/acnh_json/) JSON 형식 변경에 따라 썸네일 클릭시 불러오는 유튜브 중지
+
    - <b>TODO: </b>
      - [ ] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [ ] 유튜브 링크를 flac 파일로 대체

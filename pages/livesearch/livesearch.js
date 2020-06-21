@@ -1,5 +1,3 @@
-console.log(YT);
-
 // DOM elements
 const jsInput = document.getElementById("jsSearchInput"),
   jsForm = document.getElementById("jsForm"),
@@ -71,7 +69,8 @@ const createSongAside = (song) => {
   thumbnailFig.id = song.id;
   const thumbnailImg = document.createElement("img");
   thumbnailImg.setAttribute("draggable", false);
-  const playButton = document.createElement("div");
+  const playButton = document.createElement("h1");
+  playButton.textContent = "▶";
   playButton.className = "play-button";
   thumbnailImg.src = song.thumbnail;
   thumbnailFig.appendChild(thumbnailImg);
@@ -109,50 +108,50 @@ const fillSongs = (songs) => {
   }
 };
 
-// Youtube iframe API
-const onYouTubeIframeAPIReady = (videoId) => {
-  new YT.Player(videoId, {
-    width: 256,
-    height: 144,
-    videoId,
-  });
-};
+// [::Deprecated] Youtube iframe API
+// const onYouTubeIframeAPIReady = (videoId) => {
+//   new YT.Player(videoId, {
+//     width: 256,
+//     height: 144,
+//     videoId,
+//   });
+// };
 
-// Create Youtube video DOM element
-const createYoutubeVideoCard = (video) => {
-  videoId = video.link.toString().split("=")[1];
-  const youtubeAside = document.createElement("aside");
+// [::Deprecated] Create Youtube video DOM element
+// const createYoutubeVideoCard = (video) => {
+//   videoId = video.link.toString().split("=")[1];
+//   const youtubeAside = document.createElement("aside");
 
-  // Video
-  const thumbnailFig = document.createElement("figure");
-  const videoPlayer = document.createElement("div");
-  videoPlayer.id = videoId;
-  thumbnailFig.appendChild(videoPlayer);
+//   // Video
+//   const thumbnailFig = document.createElement("figure");
+//   const videoPlayer = document.createElement("div");
+//   videoPlayer.id = videoId;
+//   thumbnailFig.appendChild(videoPlayer);
 
-  // Video Title
-  const videoTitle = document.createElement("p");
-  videoTitle.textContent = video["title"];
+//   // Video Title
+//   const videoTitle = document.createElement("p");
+//   videoTitle.textContent = video["title"];
 
-  youtubeAside.appendChild(thumbnailFig);
-  youtubeAside.appendChild(videoTitle);
+//   youtubeAside.appendChild(thumbnailFig);
+//   youtubeAside.appendChild(videoTitle);
 
-  return youtubeAside;
-};
+//   return youtubeAside;
+// };
 
-// Populate DOM modal element with youtube videos
-const populateModal = (song) => {
-  if (!song) {
-    const noSongH2 = document.createElement("h2");
-    noSongH2.textContent = "유튜브 영상을 불러올 수 없습니다.";
-    jsModalRoot.appendChild(noSongH2);
-  } else {
-    song["youtube"].forEach((video) => {
-      let videoId = video.link.toString().split("=")[1];
-      jsModalRoot.appendChild(createYoutubeVideoCard(video));
-      onYouTubeIframeAPIReady(videoId);
-    });
-  }
-};
+// [::Deprecated] Populate DOM modal element with youtube videos
+// const populateModal = (song) => {
+//   if (!song) {
+//     const noSongH2 = document.createElement("h2");
+//     noSongH2.textContent = "유튜브 영상을 불러올 수 없습니다.";
+//     jsModalRoot.appendChild(noSongH2);
+//   } else {
+//     song["youtube"].forEach((video) => {
+//       let videoId = video.link.toString().split("=")[1];
+//       jsModalRoot.appendChild(createYoutubeVideoCard(video));
+//       onYouTubeIframeAPIReady(videoId);
+//     });
+//   }
+// };
 
 // Clear DOM modal element
 const clearModal = () => {
@@ -160,6 +159,7 @@ const clearModal = () => {
 };
 
 // Handles click event for thumbnail
+// TODO: Update thumbnail click event to match JSON
 const handleThumbnailClick = (event) => {
   let songID = event.path[1].id;
 
@@ -173,8 +173,8 @@ const handleThumbnailClick = (event) => {
   // Set Song Tilte
   jsSongTitle.textContent = clickedSong["kor_title"];
 
-  // Populate modal with given video
-  populateModal(clickedSong);
+  // [::Deprecated] Populate modal with given video
+  // populateModal(clickedSong);
 
   // Display modal
   jsModal.style.display = "block";
