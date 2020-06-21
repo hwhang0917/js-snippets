@@ -108,50 +108,32 @@ const fillSongs = (songs) => {
   }
 };
 
-// [::Deprecated] Youtube iframe API
-// const onYouTubeIframeAPIReady = (videoId) => {
-//   new YT.Player(videoId, {
-//     width: 256,
-//     height: 144,
-//     videoId,
-//   });
-// };
+// Populate modal with songs
+const populateModal = (clickedSong) => {
+  // Create aircheck figure
+  const airCheckFig = document.createElement("figure");
+  const airCheckCaption = document.createElement("figcaption");
+  airCheckCaption.textContent = "Air Check";
+  const airCheckAudio = document.createElement("audio");
+  airCheckAudio.controls = true;
+  airCheckAudio.src = clickedSong["music"]["aircheck"];
+  airCheckFig.appendChild(airCheckCaption);
+  airCheckFig.appendChild(airCheckAudio);
 
-// [::Deprecated] Create Youtube video DOM element
-// const createYoutubeVideoCard = (video) => {
-//   videoId = video.link.toString().split("=")[1];
-//   const youtubeAside = document.createElement("aside");
+  // Create live figure
+  const liveFig = document.createElement("figure");
+  const liveCaption = document.createElement("figcaption");
+  liveCaption.textContent = "Live";
+  const liveAudio = document.createElement("audio");
+  liveAudio.controls = true;
+  liveAudio.src = clickedSong["music"]["live"];
+  liveFig.appendChild(liveCaption);
+  liveFig.appendChild(liveAudio);
 
-//   // Video
-//   const thumbnailFig = document.createElement("figure");
-//   const videoPlayer = document.createElement("div");
-//   videoPlayer.id = videoId;
-//   thumbnailFig.appendChild(videoPlayer);
-
-//   // Video Title
-//   const videoTitle = document.createElement("p");
-//   videoTitle.textContent = video["title"];
-
-//   youtubeAside.appendChild(thumbnailFig);
-//   youtubeAside.appendChild(videoTitle);
-
-//   return youtubeAside;
-// };
-
-// [::Deprecated] Populate DOM modal element with youtube videos
-// const populateModal = (song) => {
-//   if (!song) {
-//     const noSongH2 = document.createElement("h2");
-//     noSongH2.textContent = "유튜브 영상을 불러올 수 없습니다.";
-//     jsModalRoot.appendChild(noSongH2);
-//   } else {
-//     song["youtube"].forEach((video) => {
-//       let videoId = video.link.toString().split("=")[1];
-//       jsModalRoot.appendChild(createYoutubeVideoCard(video));
-//       onYouTubeIframeAPIReady(videoId);
-//     });
-//   }
-// };
+  // Append music to modal
+  jsModalRoot.appendChild(airCheckFig);
+  jsModalRoot.appendChild(liveFig);
+};
 
 // Clear DOM modal element
 const clearModal = () => {
@@ -173,8 +155,8 @@ const handleThumbnailClick = (event) => {
   // Set Song Tilte
   jsSongTitle.textContent = clickedSong["kor_title"];
 
-  // [::Deprecated] Populate modal with given video
-  // populateModal(clickedSong);
+  // Populate modal with given video
+  populateModal(clickedSong);
 
   // Display modal
   jsModal.style.display = "block";

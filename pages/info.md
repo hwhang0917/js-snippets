@@ -14,6 +14,7 @@
 
      - 각 노래의 썸네일 클릭 시에 유튜브 영상 리스트 모달을 띄우도록 기획하였는데, JS에서 XMLHttpRequest 요청하여 외부 JSON 을 가져오는 과정이 비동기적으로 실행되어 오류가 발생하였습니다. 이를 해결하기 위하여 getSongs() 함수 내에서 addEventListener을 실행하는 함수를 콜백하여 실행하여 해결.
      - 유튜브 영상 iframe을 HTML 페이지에 추가하는 과정에서 Refused to display 'url' in a frame because it set 'X-Frame-Options' to 'sameorigin' 에러 발생하였습니다. 따라서 [유튜브 iframe API](https://developers.google.com/youtube/iframe_api_reference)를 참고하여서 API를 직접 import 하여서 문서에서 설명해준 예시대로 사용하였습니다.
+     - 크롤링된 유튜브 영상들은 영문 제목을 유튜브에 검색했을때 가장 위의 결과물 5개 영상이였습니다. 때문에, 실제 노래와 맞지 않는 관련없는 영상이 포함되어있기도 하였습니다. 이에, 음악을 가져오는 소스를 [누키피디아](https://nookipedia.com/wiki/Main_Page)에 있는 flac 파일 링크로 대체하였습니다.
 
    - <b>업데이트</b>
 
@@ -38,9 +39,14 @@
        - 썸네일 플레이 버튼 CSS border => 텍스트로 변경
        - [웹스크래퍼](https://hwhang0917.github.io/acnh_json/) JSON 형식 변경에 따라 썸네일 클릭시 불러오는 유튜브 중지
 
+     - <i>0.3.0 버전</i>
+
+       - 기존 유튜브였던 오디오 파일을 flac 링크로 대체
+         - 모달에서 [HTML audio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)를 띄움
+
    - <b>TODO: </b>
      - [ ] 콜백 함수들을 Promise 패턴으로 리팩토링
-     - [ ] 유튜브 링크를 flac 파일로 대체
+     - [x] 유튜브 링크를 flac 파일로 대체
 
 2. <h3 id="p2"> 한글 단어 카운터 </h3>
 
