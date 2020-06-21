@@ -55,8 +55,16 @@
    현재 작업중... <br>
    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio sapien, consectetur sed lacus in, luctus cursus urna. Suspendisse non enim nec diam mattis consectetur eu id sem. Fusce accumsan augue sit amet purus pharetra, sit amet lobortis dui vestibulum. Morbi accumsan diam non facilisis tempor. Cras tristique augue a risus vestibulum, eu suscipit nisl vehicula. Aenean risus diam, ullamcorper nec massa in, laoreet volutpat metus. Nulla rhoncus lectus sit amet est sodales rutrum ac sit amet diam.
 
+3. <h3 id="p3"> 클릭 & 로드 </h3>
+
+   [링크](https://hwhang0917.github.io/js-snippets/pages/click-and-load/)
+
+   드리블 프로젝트 예제를 보고 바닐라 자바스크립트로 클로닝 하였습니다. <sup id="a2">[2](#f2)</sup>
+
 ---
 
 ## 각주
 
-<small id="f1">1</small> [ACNH JSON mock API](https://hwhang0917.github.io/acnh_json/) [↩](#a1)
+<small id="f1">1</small> [ACNH JSON mock API](https://hwhang0917.github.io/acnh_json/) [⬆](#a1)
+<br>
+<small id="f2">2</small> [Dribble Upload](https://dribbble.com/shots/6052541-Upload-window-interactions) [⬆](#a2)
