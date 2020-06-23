@@ -16,8 +16,8 @@ const SONG_API = "https://hwhang0917.github.io/acnh_json/api/acnh_songs.json";
 // songs JS object
 let songs = {};
 
-// Handles keyup event in search input element
-const handleKeyUp = (event) => {
+// Handles input event in search input element
+const handleInput = (event) => {
   let query = jsInput.value.toUpperCase();
   let songCards = document.getElementsByClassName("song-card");
 
@@ -187,7 +187,7 @@ const addThumbnailClickEvent = () => {
 // Initialization
 const init = () => {
   getSongs(addThumbnailClickEvent);
-  jsSearchInput.addEventListener("keyup", handleKeyUp);
+  jsSearchInput.addEventListener("input", handleInput);
   jsForm.addEventListener("submit", handleSubmit);
 };
 

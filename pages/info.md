@@ -44,6 +44,11 @@
        - 기존 유튜브였던 오디오 파일을 flac 링크로 대체
          - 모달에서 [HTML audio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)를 띄움
 
+     - - <i>0.3.1 버전</i>
+
+       - 기존 검색창의 onkeyup 이벤트는 클립보드로부터 마우스로 붙여넣기한 이벤트를 인지하지 못하였음.
+         - onkeyup 이벤트를 oninput 이벤트로 변경.
+
    - <b>TODO: </b>
      - [ ] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
@@ -59,6 +64,7 @@
 
    [링크](https://hwhang0917.github.io/js-snippets/pages/click-and-load/)
 
+   현재 작업중... <br>
    드리블 프로젝트 예제를 보고 바닐라 자바스크립트로 클로닝 하였습니다. <sup id="a2">[2](#f2)</sup>
 
 ---
