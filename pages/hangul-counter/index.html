@@ -3,14 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles.css" />
     <title>Hangul Counter</title>
   </head>
   <body>
-    <main>
-      <a href="../../" class="home-link">↩ Back</a>
-      <h3>NOT RELEASED</h3>
+    <header>
+      <nav>
+        <a href="../../" class="home-link">↩ Back</a>
+        <a
+          href="https://github.com/hwhang0917/js-snippets/blob/master/pages/info.md#p2"
+          class="dev-link"
+          >개발 로그</a
+        >
+      </nav>
+      <section>
+        <heading>
+          <h1>한글 카운터</h1>
+          <h4>실시간 입력된 한글 문단의 글자 개수 통계</h4>
+        </heading>
+      </section>
+      <hr />
+    </header>
+    <main class="main">
+      <section>
+        <small>
+          <a
+            href="https://namu.wiki/w/%ED%98%84%EB%8C%80%20%ED%95%9C%EA%B8%80%EC%9D%98%20%EB%AA%A8%EB%93%A0%20%EA%B8%80%EC%9E%90/%EC%9C%A0%EB%8B%88%EC%BD%94%EB%93%9C"
+            >현대 한글의 모든 글자/유니코드</a
+          >만 통계에 포합됩니다. (* 영어, 특수문자는 제외됨.)
+        </small>
+      </section>
+      <section>
+        <div class="wordcounter-container">
+          <span>글자수:</span>
+          <span id="jsWordCount">0</span>
+        </div>
+        <form class="hangul-form" id="jsHangulForm" action="#" target="_self">
+          <textarea id="jsTextArea"></textarea>
+          <input
+            class="submit-btn"
+            id="jsSubmitBtn"
+            type="submit"
+            value="결과보기"
+          />
+        </form>
+      </section>
+      <section>
+        <div class="hangul-stats hidden" id="jsChart"></div>
+      </section>
     </main>
+    <footer>
+      <hr />
+      <section>
+        <small>
+          <span>아이콘: </span>
+          <a href="https://fontawesome.com/">Font Awesome</a>
+          <span><strong>·</strong></span>
+          <span>폰트: </span>
+          <a href="https://noonnu.cc/">눈누</a>
+        </small>
+      </section>
+    </footer>
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/3b255314a2.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Hangul Counter -->
+    <script src="hangulcounter.js"></script>
   </body>
 </html>

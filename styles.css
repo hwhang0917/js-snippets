@@ -91,3 +91,8 @@ figure {
 .langs {
   user-select: none;
 }
+
+.screenshots {
+  width: 280px;
+  height: 220px;
+}

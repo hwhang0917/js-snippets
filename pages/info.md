@@ -53,12 +53,23 @@
      - [ ] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
 
-2. <h3 id="p2"> 한글 단어 카운터 </h3>
+2. <h3 id="p2"> 한글 글자 카운터 및 통계 </h3>
 
    [링크](https://hwhang0917.github.io/js-snippets/pages/hangul-counter/)
 
-   현재 작업중... <br>
-   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio sapien, consectetur sed lacus in, luctus cursus urna. Suspendisse non enim nec diam mattis consectetur eu id sem. Fusce accumsan augue sit amet purus pharetra, sit amet lobortis dui vestibulum. Morbi accumsan diam non facilisis tempor. Cras tristique augue a risus vestibulum, eu suscipit nisl vehicula. Aenean risus diam, ullamcorper nec massa in, laoreet volutpat metus. Nulla rhoncus lectus sit amet est sodales rutrum ac sit amet diam.
+   영문에서 자주 쓰는 알파벳을 통계를 읽어봤을 때 알파벳 e가 가장 많이 쓰인다는 것을 알게 되었는데, 한국어 (한글)도 이런 통계를 구하는 웹 어플리케이션을 만들어보겠다고 기획하게 되었습니다. 한글 같은 경우는 [나무위키의 현대 한글의 모든 문자 유니코드](https://namu.wiki/w/%ED%98%84%EB%8C%80%20%ED%95%9C%EA%B8%80%EC%9D%98%20%EB%AA%A8%EB%93%A0%20%EA%B8%80%EC%9E%90/%EC%9C%A0%EB%8B%88%EC%BD%94%EB%93%9C)를 보게되면 알파벳 보다 훨씬 많은 량의 글자 조합이 가능한것을 알 수있습니다. 코드 자체는 입력된 문단의 텍스트를 단어별로 for 루프를 돌려, 글로벌로 선언된 오브젝트에 글자별로 카운터를 만들었습니다. 부가적으로 input 이벤트가 발생할 때마다 글자 수를 업데이트하여 표기하도록 만들었습니다.
+
+   - <b>시행착오:</b>
+
+     - 빈 JS 오브젝트에서 없는 글자는 undefined 타입인데, 여기서 ++ 연산자를 사용하여 increment시 NaN타입이 저장되는 것을 발견하였습니다. 그래서 통계를 계산하기 이전에 텍스트 문자별로 for 루프를 돌려 1로 지정되도록 initiate해주었습니다. 하지만 이런 방식을 사용할 시 텍스트에서 불필요한 for 루프가 돌게됩니다. 이를 해결하기 위해서 기존의 for 루프내 문자열이 undefined 일시 1로 initiate하는 조건문을 달았습니다.
+
+   - <b>업데이트</b>
+
+     - <i>0.1.0 버전</i>
+
+       - 한글 글자수 카운터 추가
+       - 한글 글자별 카운터 디스플레이
+       - Favicon 추가
 
 3. <h3 id="p3"> 클릭 & 로드 </h3>
 
