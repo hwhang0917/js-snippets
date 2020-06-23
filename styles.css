@@ -87,3 +87,7 @@ figure {
 .version .version__number {
   font-size: 10px;
 }
+
+.langs {
+  user-select: none;
+}
