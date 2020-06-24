@@ -22,6 +22,13 @@ const clearStats = () => {
 const showStats = () => {
   if (Chart) {
     // Check if Chart.js loaded
+
+    // Remove hidden class name (display element)
+    statsContainer.classList.remove("hidden");
+
+    // Scroll smoothly to stats container
+    statsContainer.scrollIntoView({ block: "start", behavior: "smooth" });
+
     // Fill Stats through Chart JS and display chart
     let ctx = statsContainer.getContext("2d");
     let chart = new Chart(ctx, {
@@ -50,12 +57,6 @@ const showStats = () => {
         },
       },
     });
-
-    // Remove hidden class name (display element)
-    statsContainer.classList.remove("hidden");
-
-    // Scroll smoothly to stats container
-    statsContainer.scrollIntoView({ behavior: "smooth" });
   } else {
     console.log("❌ Chart.js not loaded! Please reload.");
   }
