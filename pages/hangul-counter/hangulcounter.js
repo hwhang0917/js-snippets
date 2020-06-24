@@ -15,22 +15,56 @@ const textArea = document.getElementById("jsTextArea"),
   statsContainer = document.getElementById("jsChart");
 
 const clearStats = () => {
+  // Empty stats object
   hangul_stats = {};
 };
 
 const showStats = () => {
-  // Show stat canvas if hidden
-  if (statsContainer.classList.contains("hidden"))
-    statsContainer.classList.toggle("hidden");
-  statsContainer.textContent = `${JSON.stringify(hangul_stats)}`;
-  // Scroll to stats
-  statsContainer.scrollIntoView({ behavior: "smooth" });
+  if (Chart) {
+    // Check if Chart.js loaded
+    // Fill Stats through Chart JS and display chart
+    let ctx = statsContainer.getContext("2d");
+    let chart = new Chart(ctx, {
+      // Type of chart
+      type: "bar",
+
+      // Data
+      data: {
+        labels: Object.keys(hangul_stats),
+        datasets: [
+          {
+            label: "한글 글자수 통계",
+            backgroundColor: "rgba(255, 99, 132, .8)",
+            borderColor: "rgb(255, 99, 132)",
+            data: Object.values(hangul_stats),
+          },
+        ],
+      },
+
+      // Configuration options
+      options: {
+        tooltips: {
+          width: 500,
+          height: 500,
+          titleFont: 30,
+        },
+      },
+    });
+
+    // Remove hidden class name (display element)
+    statsContainer.classList.remove("hidden");
+
+    // Scroll smoothly to stats container
+    statsContainer.scrollIntoView({ behavior: "smooth" });
+  } else {
+    console.log("❌ Chart.js not loaded! Please reload.");
+  }
 };
 
 const handleInput = (event) => {
+  // Handles input event in textarea
   string_size = textArea.value.length - 1;
   wordCounter.textContent = string_size + 1;
-  console.log(string_size);
 };
 
 const handleSubmit = (event) => {
