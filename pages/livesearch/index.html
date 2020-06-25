@@ -40,7 +40,14 @@
       <hr />
     </header>
     <main class="main">
-      <section id="root"></section>
+      <section id="root">
+        <div class="lds-ring" id="jsLoading">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </section>
     </main>
     <div class="modal" id="jsModal">
       <div class="modal__content">
@@ -67,11 +74,12 @@
           ><span><strong>·</strong></span>
           <span>폰트: </span>
           <a href="https://noonnu.cc/">눈누</a>
+          <span><strong>·</strong></span>
+          <span>로딩 아이콘: </span>
+          <a href="https://loading.io/css/">Loading.io</a>
         </small>
       </section>
     </footer>
-    <!-- [Deprecated] Youtube iframe API -->
-    <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
     <!-- Fontawesome -->
     <script
       src="https://kit.fontawesome.com/3b255314a2.js"

@@ -1,19 +1,21 @@
+"use strict";
+
 // DOM elements
 const jsInput = document.getElementById("jsSearchInput"),
   jsForm = document.getElementById("jsForm"),
+  jsLoading = document.getElementById("jsLoading"),
   jsModal = document.getElementById("jsModal"),
   jsSongTitle = document.getElementById("jsSongTitle"),
   jsCloseBtn = document.getElementById("jsCloseBtn"),
   jsModalRoot = document.getElementById("jsModalRoot");
-const root = document.getElementById("root");
 
-// Boolean
-let loaded = false;
+// Root DOM element where song thumbnails go
+const root = document.getElementById("root");
 
 // JSON mock API address
 const SONG_API = "https://hwhang0917.github.io/acnh_json/api/acnh_songs.json";
 
-// songs JS object
+// Global songs JS object
 let songs = {};
 
 // Handles input event in search input element
@@ -34,23 +36,28 @@ const handleInput = (event) => {
 const handleSubmit = (event) => event.preventDefault();
 
 // HTTP request for ACNH song JSON
-const getSongs = (callback) => {
-  let request = new XMLHttpRequest();
-  request.open("GET", SONG_API, true);
-  request.send();
-  request.onload = () => {
-    if (request.status === 200) {
-      console.log(
-        `✅ Success ${request.status}: Retrieved JSON from ${SONG_API}`
-      );
-      songs = JSON.parse(request.response);
-      fillSongs(songs);
-      addThumbnailClickEvent();
-    } else {
-      console.log(`❌ Error ${request.status}: ${request.statusText}`);
-      fillSongs(null);
-    }
-  };
+const getSongs = () => {
+  return new Promise((resolve, reject) => {
+    let request = new XMLHttpRequest();
+    request.open("GET", SONG_API);
+    request.onload = () => {
+      if (request.status >= 200 && request.status < 300) {
+        songs = JSON.parse(request.response);
+        resolve(songs);
+
+        // Test loading (3sec)
+        // setTimeout(() => {
+        //   resolve(songs);
+        // }, 3000);
+      } else {
+        reject({ status: request.status, message: request.statusText });
+      }
+    };
+    request.onerror = () => {
+      reject({ status: request.status, message: request.statusText });
+    };
+    request.send();
+  });
 };
 
 // Creates song aside DOM element
@@ -92,20 +99,25 @@ const createSongAside = (song) => {
 
 // Populate (fill) DOM with JSON songs
 const fillSongs = (songs) => {
-  const newSection = document.createElement("section");
-  if (!songs) {
-    // If no songs were received, display no Song error
-    const noSongH2 = document.createElement("h2");
-    noSongH2.textContent = "노래를 불러올 수 없습니다.";
-    newSection.appendChild(noSongH2);
-    root.appendChild(newSection);
-  } else {
-    // For loop songs into MVP CSS aside tag element
-    songs.forEach((song) => {
-      root.appendChild(createSongAside(song));
-    });
-    loaded = true;
-  }
+  return new Promise((resolve, reject) => {
+    jsLoading.style.display = "none";
+    if (songs) {
+      // For loop songs into MVP CSS aside tag element
+      songs.forEach((song) => {
+        root.appendChild(createSongAside(song));
+      });
+      resolve(songs);
+    } else {
+      // If no songs were received, display no Song error
+      const newSection = document.createElement("section");
+      const noSongH2 = document.createElement("h2");
+      noSongH2.textContent =
+        "노래를 불러올 수 없습니다. 관리자에게 문의하세요.";
+      newSection.appendChild(noSongH2);
+      root.appendChild(newSection);
+      reject(new Error("❌ERROR: [fillSongs()] Did not recieve any songs"));
+    }
+  });
 };
 
 // Populate modal with songs
@@ -141,7 +153,6 @@ const clearModal = () => {
 };
 
 // Handles click event for thumbnail
-// TODO: Update thumbnail click event to match JSON
 const handleThumbnailClick = (event) => {
   let songID = event.path[1].id;
 
@@ -177,16 +188,32 @@ const handleThumbnailClick = (event) => {
 
 // Adds click event listner for each song thumbnails
 const addThumbnailClickEvent = () => {
-  // console.log("😁 Adding event listners ... ");
-  let songThumbnails = document.getElementsByClassName("song-thumbnail");
-  for (let i = 0; i < songThumbnails.length; i++) {
-    songThumbnails[i].addEventListener("click", handleThumbnailClick);
-  }
+  return new Promise((resolve, reject) => {
+    let songThumbnails = document.getElementsByClassName("song-thumbnail");
+    if (songThumbnails) {
+      // found song thumbnails DOM elements
+      for (let i = 0; i < songThumbnails.length; i++) {
+        songThumbnails[i].addEventListener("click", handleThumbnailClick);
+      }
+      // Resolve Promise
+      resolve();
+    } else {
+      // Cannot find any song thumbnails
+      reject(
+        new Error(
+          "❌ERROR: [addThumbnailClickEvent()] Cannot find any song thumbnails"
+        )
+      );
+    }
+  });
 };
 
 // Initialization
 const init = () => {
-  getSongs(addThumbnailClickEvent);
+  getSongs() // Promise pattern
+    .then(fillSongs)
+    .then(addThumbnailClickEvent)
+    .catch(console.log);
   jsSearchInput.addEventListener("input", handleInput);
   jsForm.addEventListener("submit", handleSubmit);
 };

@@ -15,6 +15,7 @@
      - 각 노래의 썸네일 클릭 시에 유튜브 영상 리스트 모달을 띄우도록 기획하였는데, JS에서 XMLHttpRequest 요청하여 외부 JSON 을 가져오는 과정이 비동기적으로 실행되어 오류가 발생하였습니다. 이를 해결하기 위하여 getSongs() 함수 내에서 addEventListener을 실행하는 함수를 콜백하여 실행하여 해결.
      - 유튜브 영상 iframe을 HTML 페이지에 추가하는 과정에서 Refused to display 'url' in a frame because it set 'X-Frame-Options' to 'sameorigin' 에러 발생하였습니다. 따라서 [유튜브 iframe API](https://developers.google.com/youtube/iframe_api_reference)를 참고하여서 API를 직접 import 하여서 문서에서 설명해준 예시대로 사용하였습니다.
      - 크롤링된 유튜브 영상들은 영문 제목을 유튜브에 검색했을때 가장 위의 결과물 5개 영상이였습니다. 때문에, 실제 노래와 맞지 않는 관련없는 영상이 포함되어있기도 하였습니다. 이에, 음악을 가져오는 소스를 [누키피디아](https://nookipedia.com/wiki/Main_Page)에 있는 flac 파일 링크로 대체하였습니다.
+     - 기존에 자바스크립트는 (1) JSON 파일을 XMLHttpRequest로 불러오기 (2) 불러온 JSON을 글로벌 오브젝트로 저장 (3) 저장된 오브젝트를 루프하면서 HTML 썸네일 생성 (4) 생성된 썸네일마다 클릭 이벤트 리스너 추가 순서대로 진행되었는데, 이 모든 것이 콜백 형식으로 되어있었습니다. 이러한 코드를 Promise 패턴으로 리팩토링하여서 스크립트 init()시 (1)~(4)의 태스크들을 Promise의 Resolve, Reject로 리턴하도록 바꾸었습니다. 때문에 (1) 통신중 로딩을 표기하고 Resolve시 (3) 태스크 초기에 로딩을 display: none으로 변경하는 방법으로 로딩 표시를 추가하였습니다.
 
    - <b>업데이트</b>
 
@@ -49,8 +50,13 @@
        - 기존 검색창의 onkeyup 이벤트는 클립보드로부터 마우스로 붙여넣기한 이벤트를 인지하지 못하였음.
        - onkeyup 이벤트를 oninput 이벤트로 변경.
 
+     - <i>0.4.0 버전</i>
+
+       - 콜백 함수들을 Promise 함수로 변경
+       - Promise를 이용해 XMLHttpRequest로 JSON을 가져오는 중 로딩 표시
+
    - <b>TODO: </b>
-     - [ ] 콜백 함수들을 Promise 패턴으로 리팩토링
+     - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
 
 2. <h3 id="p2"> 한글 글자 카운터 및 통계 </h3>
