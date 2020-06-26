@@ -55,9 +55,15 @@
        - 콜백 함수들을 Promise 함수로 변경
        - Promise를 이용해 XMLHttpRequest로 JSON을 가져오는 중 로딩 표시
 
+     - <i>0.4.1 버전</i>
+
+       - audio element 생성 함수 추가 (리팩토링)
+       - 자동 재생 기능 추가
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
+     - [ ] Async/Await 패턴으로 리팩토링 및 코드 가독성 개선
 
 2. <h3 id="p2"> 한글 글자 카운터 및 통계 </h3>
 

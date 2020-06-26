@@ -32,9 +32,6 @@ const handleInput = (event) => {
   }
 };
 
-// prevent default GET request when submit is entered
-const handleSubmit = (event) => event.preventDefault();
-
 // HTTP request for ACNH song JSON
 const getSongs = () => {
   return new Promise((resolve, reject) => {
@@ -120,27 +117,42 @@ const fillSongs = (songs) => {
   });
 };
 
+// Create audio DOM element
+const createAudio = (src, autoplay = false) => {
+  const newAudio = document.createElement("audio");
+  newAudio.src = src;
+
+  // Audio Options
+  newAudio.autoplay = autoplay;
+  newAudio.controls = true;
+  newAudio.loop = true;
+  newAudio.volume = 0.1;
+
+  return newAudio;
+};
+
 // Populate modal with songs
 const populateModal = (clickedSong) => {
+  // default autoplay boolean
+  const autoplay = true;
+
+  // FLAC source
+  const aircheckSrc = clickedSong["music"]["aircheck"];
+  const liveSrc = clickedSong["music"]["live"];
+
   // Create aircheck figure
   const airCheckFig = document.createElement("figure");
   const airCheckCaption = document.createElement("figcaption");
   airCheckCaption.textContent = "Air Check";
-  const airCheckAudio = document.createElement("audio");
-  airCheckAudio.controls = true;
-  airCheckAudio.src = clickedSong["music"]["aircheck"];
   airCheckFig.appendChild(airCheckCaption);
-  airCheckFig.appendChild(airCheckAudio);
+  airCheckFig.appendChild(createAudio(aircheckSrc, autoplay));
 
   // Create live figure
   const liveFig = document.createElement("figure");
   const liveCaption = document.createElement("figcaption");
   liveCaption.textContent = "Live";
-  const liveAudio = document.createElement("audio");
-  liveAudio.controls = true;
-  liveAudio.src = clickedSong["music"]["live"];
   liveFig.appendChild(liveCaption);
-  liveFig.appendChild(liveAudio);
+  liveFig.appendChild(createAudio(liveSrc));
 
   // Append music to modal
   jsModalRoot.appendChild(airCheckFig);
@@ -215,7 +227,9 @@ const init = () => {
     .then(addThumbnailClickEvent)
     .catch(console.log);
   jsSearchInput.addEventListener("input", handleInput);
-  jsForm.addEventListener("submit", handleSubmit);
+
+  // Prevent default submit event for form
+  jsForm.addEventListener("submit", (event) => event.preventDefault());
 };
 
 // Initiate when window loaded
