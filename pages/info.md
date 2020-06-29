@@ -101,8 +101,22 @@
 
    [링크](https://hwhang0917.github.io/js-snippets/pages/click-and-load/)
 
-   현재 작업중... <br>
+   **현재 작업중...** <br>
    드리블 프로젝트 예제를 보고 바닐라 자바스크립트로 클로닝 하였습니다. <sup id="a2">[2](#f2)</sup>
+
+4. <h3 id="p4"> 스네이크 게임 </h3>
+
+   [링크](https://hwhang0917.github.io/js-snippets/pages/snake/)
+
+   **현재 작업중...** <br>
+   스네이크 게임 구현중.
+
+5. <h3 id="p5"> 틱택토 AI </h3>
+
+   [링크](https://hwhang0917.github.io/js-snippets/pages/tictactoe/)
+
+   **현재 작업중...** <br>
+   틱택토 게임 구현중.
 
 ---
 
