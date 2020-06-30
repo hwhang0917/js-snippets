@@ -3,14 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
     <link rel="stylesheet" href="styles.css" />
     <title>Click and Load</title>
   </head>
   <body>
-    <main>
-      <a href="../../" class="home-link">↩ Back</a>
-      <h3>NOT RELEASED</h3>
+    <main class="main">
+      <div class="return-link">
+        <a href="../../">↩ Back</a>
+      </div>
+      <div class="container">
+        <div class="container__desc collapsed">
+          <h1 class="desc desc__upload-header">
+            파일 <span id="fileCounter">3</span>개 업로드중 ...
+          </h1>
+          <p class="desc desc__upload-percentage">
+            <span id="percentage">55</span>% · <span id="seconds">2</span> 초
+            남음
+          </p>
+        </div>
+        <div class="container__controls collapsed">
+          <div class="controller controls__action-ctrl">
+            <i class="control fas fa-pause"></i>
+            <i class="control fas fa-times"></i>
+          </div>
+          <div class="controller controls__meta-crtl">
+            <i class="control fas fa-expand-alt"></i>
+            <i class="control fas fa-ellipsis-v"></i>
+          </div>
+        </div>
+      </div>
     </main>
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/3b255314a2.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
