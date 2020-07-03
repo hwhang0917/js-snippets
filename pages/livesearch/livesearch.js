@@ -12,6 +12,13 @@ const jsInput = document.getElementById("jsSearchInput"),
 // Root DOM element where song thumbnails go
 const root = document.getElementById("root");
 
+// Local Storage Keys
+const SONGS_LS = "songs",
+  LAST_SCRAPE_LS = "lastscrape";
+
+// Time constant
+const WEEK_IN_MS = 604800000;
+
 // JSON API address (Golang hosted in Repl.it)
 const SONG_API = "https://ACNHgolangsongscrapper--hwhang0917.repl.co";
 
@@ -32,29 +39,79 @@ const handleInput = (event) => {
   }
 };
 
+// Get current date in format: YYYY-MM-DD
+const getCurrentDate = () => {
+  const date = new Date();
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+};
+
+// Check if given time has passed week
+const passWeek = (timeStr) => {
+  const storedTime = Date.parse(timeStr);
+  const currentTime = Date.now();
+
+  if (storedTime + WEEK_IN_MS < currentTime) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// Should scrape again checker
+const shouldScrapeAgain = () => {
+  const loadedSongs = localStorage.getItem(SONGS_LS);
+  const loadedStoredTime = localStorage.getItem(LAST_SCRAPE_LS);
+
+  // Empty local storage
+  if (loadedSongs === null || loadedStoredTime === null) {
+    return true;
+  } else {
+    // Scrape data expired week
+    if (passWeek(loadedStoredTime)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
 // HTTP request for ACNH song JSON
 const getSongs = () => {
-  return new Promise((resolve, reject) => {
-    let request = new XMLHttpRequest();
-    request.open("GET", SONG_API);
-    request.onload = () => {
-      if (request.status >= 200 && request.status < 300) {
-        songs = JSON.parse(request.response);
-        resolve(songs);
+  // Check if data should be scraped again
+  if (shouldScrapeAgain()) {
+    return new Promise((resolve, reject) => {
+      let request = new XMLHttpRequest();
+      request.open("GET", SONG_API);
+      request.onload = () => {
+        if (request.status >= 200 && request.status < 300) {
+          songs = JSON.parse(request.response);
 
-        // Test loading (3sec)
-        // setTimeout(() => {
-        //   resolve(songs);
-        // }, 3000);
-      } else {
+          // Set local storage
+          localStorage.setItem(SONGS_LS, JSON.stringify(songs));
+          localStorage.setItem(LAST_SCRAPE_LS, getCurrentDate());
+
+          resolve(songs);
+
+          // Test loading (3sec)
+          // setTimeout(() => {
+          //   resolve(songs);
+          // }, 3000);
+        } else {
+          reject({ status: request.status, message: request.statusText });
+        }
+      };
+      request.onerror = () => {
         reject({ status: request.status, message: request.statusText });
-      }
-    };
-    request.onerror = () => {
-      reject({ status: request.status, message: request.statusText });
-    };
-    request.send();
-  });
+      };
+      request.send();
+    });
+  } else {
+    return new Promise((resolve, _) => {
+      const loadedSongs = localStorage.getItem(SONGS_LS);
+      songs = JSON.parse(loadedSongs);
+      resolve(songs);
+    });
+  }
 };
 
 // Creates song aside DOM element
