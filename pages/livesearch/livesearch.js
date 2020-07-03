@@ -12,8 +12,8 @@ const jsInput = document.getElementById("jsSearchInput"),
 // Root DOM element where song thumbnails go
 const root = document.getElementById("root");
 
-// JSON mock API address
-const SONG_API = "https://hwhang0917.github.io/acnh_json/api/acnh_songs.json";
+// JSON API address (Golang hosted in Repl.it)
+const SONG_API = "https://ACNHgolangsongscrapper--hwhang0917.repl.co";
 
 // Global songs JS object
 let songs = {};

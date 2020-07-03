@@ -16,6 +16,7 @@
      - 유튜브 영상 iframe을 HTML 페이지에 추가하는 과정에서 Refused to display 'url' in a frame because it set 'X-Frame-Options' to 'sameorigin' 에러 발생하였습니다. 따라서 [유튜브 iframe API](https://developers.google.com/youtube/iframe_api_reference)를 참고하여서 API를 직접 import 하여서 문서에서 설명해준 예시대로 사용하였습니다.
      - 크롤링된 유튜브 영상들은 영문 제목을 유튜브에 검색했을때 가장 위의 결과물 5개 영상이였습니다. 때문에, 실제 노래와 맞지 않는 관련없는 영상이 포함되어있기도 하였습니다. 이에, 음악을 가져오는 소스를 [누키피디아](https://nookipedia.com/wiki/Main_Page)에 있는 flac 파일 링크로 대체하였습니다.
      - 기존에 자바스크립트는 (1) JSON 파일을 XMLHttpRequest로 불러오기 (2) 불러온 JSON을 글로벌 오브젝트로 저장 (3) 저장된 오브젝트를 루프하면서 HTML 썸네일 생성 (4) 생성된 썸네일마다 클릭 이벤트 리스너 추가 순서대로 진행되었는데, 이 모든 것이 콜백 형식으로 되어있었습니다. 이러한 코드를 Promise 패턴으로 리팩토링하여서 스크립트 init()시 (1)~(4)의 태스크들을 Promise의 Resolve, Reject로 리턴하도록 바꾸었습니다. 때문에 (1) 통신중 로딩을 표기하고 Resolve시 (3) 태스크 초기에 로딩을 display: none으로 변경하는 방법으로 로딩 표시를 추가하였습니다.
+     - 기존 파이썬 스크래핑 코드는 순차적으로 실행되어 96개의 동물의 숲 노래 정보를 가져오는데 약 2~3분 정도 시간이 소요되었습니다. 이러한 이유로 매번 Live-Search 페이지를 로딩할때마다 스크래핑 하는 방식보다 한번 스크래핑한 JSON파일을 깃헙 페이지에 호스팅하여 가져오는 형식을 취했습니다. 이런 느린 스크래핑을 개선하기위해 같은 파이썬 스크래핑 코드를 Go로 리팩토링하여 [Go Routine](https://tour.golang.org/concurrency/1)을 이용한 멀티쓰레딩을 통하여 3~5초 속도로 단축하였습니다. <sup id="a2">[2](#f2)</sup> 하지만 3~5초 또한 웹 로딩 속도로는 느리다고 판단하여서, 주기를 두고 스크래핑을 호출하는 형식으로 기획하였습니다. 유효 기간을 정하여 유효 기간 안에 있는 데이터를 브라우져 local storage에 저장하는 방식을 구상중입니다.
 
    - <b>업데이트</b>
 
@@ -60,10 +61,17 @@
        - audio element 생성 함수 추가 (리팩토링)
        - 자동 재생 기능 추가
 
+     - <i>0.5.0 버전</i>
+
+       - 백엔드 스크래핑 코드 Go로 변경
+       - 페이지 로딩시 [Repl.it](https://ACNHgolangsongscrapper--hwhang0917.repl.co)에 호스팅된 Go Echo 서버에서 스크래핑
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
      - [ ] Async/Await 패턴으로 리팩토링 및 코드 가독성 개선
+     - [x] 실시간 크롤링 & Faster 크롤링 w/ Go
+     - [ ] localstorage에 시간을 지정해 저장 및 불러오기
 
 2. <h3 id="p2"> 한글 글자 카운터 및 통계 </h3>
 
@@ -102,7 +110,7 @@
    [링크](https://hwhang0917.github.io/js-snippets/pages/click-and-load/)
 
    **현재 작업중...** <br>
-   드리블 프로젝트 예제를 보고 바닐라 자바스크립트로 클로닝 하였습니다. <sup id="a2">[2](#f2)</sup>
+   드리블 프로젝트 예제를 보고 바닐라 자바스크립트로 클로닝 하였습니다. <sup id="a3">[3](#f3)</sup>
 
    - <b>업데이트</b>
 
@@ -130,4 +138,6 @@
 
 <small id="f1">1</small> [ACNH JSON mock API](https://hwhang0917.github.io/acnh_json/) [⬆](#a1)
 <br>
-<small id="f2">2</small> [Dribble Upload](https://dribbble.com/shots/6052541-Upload-window-interactions) [⬆](#a2)
+<small id="f2">2</small> [Go Scrapper](https://github.com/hwhang0917/acnh_json/blob/dev/src/Go/songScrapper/main.go) [⬆](#a2)
+<br>
+<small id="f3">3</small> [Dribble Upload](https://dribbble.com/shots/6052541-Upload-window-interactions) [⬆](#a3)
