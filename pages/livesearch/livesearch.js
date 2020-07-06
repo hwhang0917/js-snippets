@@ -19,8 +19,9 @@ const SONGS_LS = "songs",
 // Time constant
 const WEEK_IN_MS = 604800000;
 
-// JSON API address (Golang hosted in Repl.it)
-const SONG_API = "https://ACNHgolangsongscrapper--hwhang0917.repl.co";
+// JSON API address (Golang hosted in Google Clound Functions)
+const SONG_API =
+  "https://us-central1-portfolio-projects-269205.cloudfunctions.net/Scrape";
 
 // Global songs JS object
 let songs = {};
