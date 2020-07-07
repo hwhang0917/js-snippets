@@ -113,6 +113,15 @@
 }
 
 /* Loading.io load CSS */
+.loading-container {
+  color: #bdc3c7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
 .lds-ring {
   display: inline-block;
   position: relative;

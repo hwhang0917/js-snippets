@@ -184,7 +184,7 @@ const createAudio = (src, autoplay = false) => {
   newAudio.autoplay = autoplay;
   newAudio.controls = true;
   newAudio.loop = true;
-  newAudio.volume = 0.1;
+  newAudio.volume = 0.3;
 
   return newAudio;
 };

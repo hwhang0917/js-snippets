@@ -78,6 +78,10 @@
 
        - 스크래핑 API를 Google Cloud Function에 배포 ([코드](https://github.com/hwhang0917/acnh_json/blob/dev/src/Go/songScrapper/acnhcloudjson/acnhcloudjson.go))
 
+     - <i>0.7.1 버전</i>
+
+       - 로딩 중 스크래핑 메세지 추가
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
