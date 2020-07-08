@@ -135,20 +135,6 @@
 
        - 정적 CSS / HTML 구현
 
-4. <h3 id="p4"> 스네이크 게임 </h3>
-
-   [링크](https://hwhang0917.github.io/js-snippets/pages/snake/)
-
-   **현재 작업중...** <br>
-   스네이크 게임 구현중.
-
-5. <h3 id="p5"> 틱택토 AI </h3>
-
-   [링크](https://hwhang0917.github.io/js-snippets/pages/tictactoe/)
-
-   **현재 작업중...** <br>
-   틱택토 게임 구현중.
-
 ---
 
 ## 각주

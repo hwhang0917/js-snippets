@@ -7,5 +7,3 @@
 - ### [Live Search](./pages/info.md#p1)
 - ### [Hangul Counter](./pages/info.md#p2)
 - ### [Click & Load](./pages/info.md#p3)
-- ### [Snake](./pages/info.md#p4)
-- ### [Tic tac Toe](./pages/info.md#p5)
