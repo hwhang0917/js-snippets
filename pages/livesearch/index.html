@@ -9,88 +9,90 @@
     <title>Live Search</title>
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="../../" class="home-link">↩ Back</a>
-        <a
-          href="https://github.com/hwhang0917/js-snippets/blob/master/pages/info.md"
-          >개발 로그</a
-        >
-      </nav>
-      <section>
-        <heading>
-          <h1>모여봐요 동물의 숲 노래 라이브러리</h1>
-        </heading>
-      </section>
-      <section>
-        <form id="jsForm">
-          <div class="search-desc"></div>
-          <div class="input-container">
-            <i class="fas fa-search"></i>
-            <input
-              type="text"
-              name="songtitle"
-              id="jsSearchInput"
-              class="search-input"
-              placeholder="노래 제목 검색..."
-            />
+    <div onclick="void(0);">
+      <header>
+        <nav>
+          <a href="../../" class="home-link">↩ Back</a>
+          <a
+            href="https://github.com/hwhang0917/js-snippets/blob/master/pages/info.md"
+            >개발 로그</a
+          >
+        </nav>
+        <section>
+          <heading>
+            <h1>모여봐요 동물의 숲 노래 라이브러리</h1>
+          </heading>
+        </section>
+        <section>
+          <form id="jsForm">
+            <div class="search-desc"></div>
+            <div class="input-container">
+              <i class="fas fa-search"></i>
+              <input
+                type="text"
+                name="songtitle"
+                id="jsSearchInput"
+                class="search-input"
+                placeholder="노래 제목 검색..."
+              />
+            </div>
+          </form>
+        </section>
+        <hr />
+      </header>
+      <main class="main">
+        <section id="root">
+          <div class="loading-container" id="jsLoading">
+            <div class="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <h2 class="loading-message">
+              노래를 스크래핑 하는 중입니다. 잠시만 기다려주세요.
+            </h2>
           </div>
-        </form>
-      </section>
-      <hr />
-    </header>
-    <main class="main">
-      <section id="root">
-        <div class="loading-container" id="jsLoading">
-          <div class="lds-ring">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <h2 class="loading-message">
-            노래를 스크래핑 하는 중입니다. 잠시만 기다려주세요.
-          </h2>
+        </section>
+      </main>
+      <div class="modal" id="jsModal">
+        <div class="modal__content">
+          <span class="close-btn" id="jsCloseBtn">&times;</span>
+          <header>
+            <h2 id="jsSongTitle"></h2>
+          </header>
+          <section class="music_container" id="jsModalRoot"></section>
         </div>
-      </section>
-    </main>
-    <div class="modal" id="jsModal">
-      <div class="modal__content">
-        <span class="close-btn" id="jsCloseBtn">&times;</span>
-        <header>
-          <h2 id="jsSongTitle"></h2>
-        </header>
-        <section class="music_container" id="jsModalRoot"></section>
       </div>
+      <footer>
+        <hr />
+        <section>
+          <small>
+            <span>CSS 베이스: </span>
+            <a href="https://andybrewer.github.io/mvp/">MVP CSS</a>
+            <span><strong>·</strong></span>
+            <span>아이콘: </span>
+            <a href="https://fontawesome.com/">Font Awesome</a>
+            <span><strong>·</strong></span>
+            <span>데이터: </span>
+            <a href="https://hwhang0917.github.io/acnh_json/"
+              >커스텀 웹 스크래퍼</a
+            ><span><strong>·</strong></span>
+            <span>폰트: </span>
+            <a href="https://noonnu.cc/">눈누</a>
+            <span><strong>·</strong></span>
+            <span>로딩 아이콘: </span>
+            <a href="https://loading.io/css/">Loading.io</a>
+          </small>
+        </section>
+      </footer>
+      <!-- Fontawesome -->
+      <script
+        src="https://kit.fontawesome.com/3b255314a2.js"
+        crossorigin="anonymous"
+      ></script>
+      <!-- Live Search JS -->
+      <script src="livesearch.js"></script>
     </div>
-    <footer>
-      <hr />
-      <section>
-        <small>
-          <span>CSS 베이스: </span>
-          <a href="https://andybrewer.github.io/mvp/">MVP CSS</a>
-          <span><strong>·</strong></span>
-          <span>아이콘: </span>
-          <a href="https://fontawesome.com/">Font Awesome</a>
-          <span><strong>·</strong></span>
-          <span>데이터: </span>
-          <a href="https://hwhang0917.github.io/acnh_json/"
-            >커스텀 웹 스크래퍼</a
-          ><span><strong>·</strong></span>
-          <span>폰트: </span>
-          <a href="https://noonnu.cc/">눈누</a>
-          <span><strong>·</strong></span>
-          <span>로딩 아이콘: </span>
-          <a href="https://loading.io/css/">Loading.io</a>
-        </small>
-      </section>
-    </footer>
-    <!-- Fontawesome -->
-    <script
-      src="https://kit.fontawesome.com/3b255314a2.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Live Search JS -->
-    <script src="livesearch.js"></script>
   </body>
 </html>

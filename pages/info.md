@@ -86,6 +86,11 @@
 
        - Autoprefixer를 사용해서 CSS 변환
 
+     - <i>0.7.3 버전</i>
+
+       - Bug Fix: Safari Mobile에서 click 이벤트를 발생시키지 않는 오류 수정
+         - Void(0) onclick 이벤트 발생으로 해결
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
