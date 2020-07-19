@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 @import "../../styles.css";
 
 .search-desc {
@@ -6,8 +13,14 @@
 }
 
 .input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding: 0px 10px;
   margin-top: 30px;
@@ -24,15 +37,28 @@
 }
 
 .song-card {
+  -webkit-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
 }
 
 .song-thumbnail {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   position: relative;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
+  -webkit-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -50,6 +76,7 @@
 }
 
 .song-thumbnail img {
+  -webkit-filter: blue(4px);
   filter: blue(4px);
 }
 
@@ -58,11 +85,17 @@
 }
 
 .song-thumbnail:hover > img {
+  -webkit-filter: brightness(50%);
   filter: brightness(50%);
 }
 
 .music_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
@@ -85,14 +118,19 @@
   padding: 10px;
   width: 80vw;
   border-radius: 15px;
+  -webkit-animation: magnifyPop 0.2s ease-in-out forwards;
   animation: magnifyPop 0.2s ease-in-out forwards;
 }
 
 .modal__content .close-btn {
   color: #aaaaaa;
   float: right;
+  -webkit-text-decoration: bold;
   text-decoration: bold;
   font-size: 30px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -103,11 +141,24 @@
   cursor: pointer;
 }
 
-@keyframes magnifyPop {
+@-webkit-keyframes magnifyPop {
   from {
+    -webkit-transform: scale(0.01);
     transform: scale(0.01);
   }
   to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes magnifyPop {
+  from {
+    -webkit-transform: scale(0.01);
+    transform: scale(0.01);
+  }
+  to {
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -115,10 +166,22 @@
 /* Loading.io load CSS */
 .loading-container {
   color: #bdc3c7;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -129,6 +192,7 @@
   height: 80px;
 }
 .lds-ring div {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
   position: absolute;
@@ -137,23 +201,39 @@
   margin: 8px;
   border: 6px solid #bdc3c7;
   border-radius: 50%;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #bdc3c7 transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
   animation-delay: -0.45s;
 }
 .lds-ring div:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
   animation-delay: -0.3s;
 }
 .lds-ring div:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
   animation-delay: -0.15s;
 }
-@keyframes lds-ring {
+@-webkit-keyframes lds-ring {
   0% {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes lds-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
