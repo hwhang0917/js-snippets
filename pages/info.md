@@ -91,10 +91,13 @@
        - Bug Fix: Safari Mobile에서 click 이벤트를 발생시키지 않는 오류 수정
          - Void(0) onclick 이벤트 발생으로 해결
 
+     - <i>0.7.3 이후~~</i>
+
+       - API 개선을 위하여 일시적으로 지원 중단
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
-     - [ ] Async/Await 패턴으로 리팩토링 및 코드 가독성 개선
      - [x] 실시간 크롤링 & Faster 크롤링 w/ Go
      - [x] localstorage에 시간을 지정해 저장 및 불러오기
      - [x] Repl.it이 아닌 AWS Lambda 또는 다른 클라우드에 API 서버 옮기기 (Google Cloud Function에 배포)

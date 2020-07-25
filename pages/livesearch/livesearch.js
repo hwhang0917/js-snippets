@@ -20,8 +20,7 @@ const SONGS_LS = "songs",
 const WEEK_IN_MS = 604800000;
 
 // JSON API address (Golang hosted in Google Clound Functions)
-const SONG_API =
-  "https://us-central1-portfolio-projects-269205.cloudfunctions.net/Scrape";
+const SONG_API = "Error";
 
 // Global songs JS object
 let songs = {};
