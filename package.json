@@ -1,0 +1,14 @@
+{
+  "name": "js-snippets",
+  "version": "1.0.0",
+  "repository": "https://github.com/hwhang0917/js-snippets.git",
+  "author": "Heesang whang <hwhang0917@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "parcel": "^1.12.4",
+    "sass": "^1.26.10"
+  },
+  "scripts": {
+    "start": "parcel pages/click-and-load/src/index.html -d pages/click-and-load"
+  }
+}

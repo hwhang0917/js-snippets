@@ -138,7 +138,6 @@
 
    [링크](https://hwhang0917.github.io/js-snippets/pages/click-and-load/)
 
-   **현재 작업중...** <br>
    드리블 프로젝트 예제를 보고 바닐라 자바스크립트로 클로닝 하였습니다. <sup id="a3">[3](#f3)</sup>
 
    - <b>업데이트</b>
@@ -146,6 +145,10 @@
      - <i>0.1.0 버전</i>
 
        - 정적 CSS / HTML 구현
+
+     - <i>1.0.0 버전</i>
+
+       - Parcel을 이용하여 번들
 
 ---
 

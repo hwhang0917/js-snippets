@@ -1,0 +1,196 @@
+.loader {
+  // Size
+  max-height: 90px;
+  min-width: 500px;
+  padding: 50px 30px;
+  border-radius: 15px;
+
+  //   Color
+  background-color: $bgWhite;
+  color: $active;
+  box-shadow: $boxShadow;
+
+  //   Position
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+
+  // Misc
+  transition: max-height $transitionTime;
+
+  .loading {
+    // Opacity
+    opacity: 1;
+    transition: opacity $transitionTime;
+
+    //   Position
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -10;
+
+    // Size
+    height: 100%;
+    width: 0%; // Modified for percentage
+
+    // Animate
+    transition: width $transitionTime;
+
+    // Color
+    background: $transparentLoader;
+  }
+
+  .loader__header {
+    //   Position
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    // Size
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+
+    .header__title {
+      .title__main {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin-bottom: 1.2em;
+      }
+      .title__sub {
+        font-size: 0.8em;
+        color: $disable;
+        animation: fadeIn ease $transitionTime;
+        & > :not(:last-child)::after {
+          content: "·";
+          margin: 5px;
+        }
+      }
+    }
+    .header__controls {
+      // Position
+      display: flex;
+      justify-content: space-around;
+
+      //   Size
+      width: 50%;
+      font-size: 1.1em;
+
+      //   Color
+      color: $disable;
+
+      .controller {
+        //   Positon
+        display: grid;
+        place-items: center;
+        padding: 5px;
+
+        //   Size
+        &:nth-child(-n + 2) {
+          // First two controllers only
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          // Color
+          background: $transparentLoader;
+        }
+
+        // Misc
+        cursor: pointer;
+        &:hover {
+          color: $active;
+          transform: scale(1.05);
+        }
+      }
+      .controller.checkmark {
+        //   Position
+        display: none;
+        cursor: default;
+      }
+    }
+  }
+
+  .loader__files {
+    // display: none;
+    opacity: 0;
+    max-height: 0;
+    //   Margin
+    margin-top: 15px;
+
+    // Transition
+    transition: all $transitionTime ease;
+
+    .file {
+      //   Position
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //   Border
+      border-top: 1px solid $transparentLoader;
+      //   Size
+      padding-top: 35px;
+      &:not(:last-child) {
+        padding-bottom: 35px;
+      }
+      //   Misc
+      cursor: pointer;
+
+      .file__divider {
+        &:last-child {
+          display: flex;
+          justify-content: flex-end;
+        }
+        width: 100%;
+        .title {
+          font-weight: 600;
+        }
+
+        .loading-backdrop {
+          // Position
+          position: relative;
+          margin-top: 10px;
+
+          //   Size
+          height: 5px;
+          width: 100%;
+
+          //   Color
+          background: $transparentLoader;
+
+          .loading-bar {
+            //   Position
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            // Size
+            height: 100%;
+            width: 0%; // individual Loading bar
+
+            // Color
+            background: $primary;
+
+            // transition
+            transition: width $transitionTime;
+          }
+        }
+
+        .sub-title {
+          color: $disable;
+          font-size: 0.8em;
+          & > :not(:last-child)::after {
+            content: "·";
+            margin: 5px;
+          }
+          .percentage::after {
+            content: " %";
+          }
+          .time-left::after {
+            content: " seconds left";
+          }
+        }
+      }
+    }
+  }
+}

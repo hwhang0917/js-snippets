@@ -1,0 +1,58 @@
+@import "https://meyerweb.com/eric/tools/css/reset/reset.css";
+@import "variables";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "components/loader.scss";
+@import "components/enlarged.scss";
+@import "components/completed.scss";
+
+body {
+  // Size
+  height: 100vh;
+  width: 100vw;
+
+  //   Position
+  display: grid;
+  place-items: center;
+
+  //   Color
+  background: $disable;
+  color: $active;
+
+  //   Font
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+
+  // Transition
+  transition-duration: 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.checkmark {
+  //   Position
+  display: none;
+  // Size
+  padding: 5px;
+  // Color
+  color: $check;
+  // Animation
+  animation: fadeIn ease 1s;
+  // Misc
+  cursor: default;
+}

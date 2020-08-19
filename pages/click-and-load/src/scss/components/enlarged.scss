@@ -1,0 +1,29 @@
+.loader.enlarged {
+  max-height: 900px;
+  transition: max-height $transitionTime;
+  .loading {
+    // Opacity
+    opacity: 0;
+    transition: opacity $transitionTime;
+  }
+
+  .loader__header {
+    .header__title {
+      .title__main {
+        margin-bottom: 0em;
+      }
+      .title__sub {
+        display: none;
+      }
+    }
+  }
+
+  .loader__files {
+    // display: block;
+    max-height: 100%;
+    opacity: 1;
+    animation: fadeIn ease $transitionTime;
+    // Transition
+    transition: $transitionTime ease;
+  }
+}
