@@ -20,7 +20,7 @@ const SONGS_LS = "songs",
 const WEEK_IN_MS = 604800000;
 
 // JSON API address (Update to use ACNHAPI)
-const SONG_API = "http://acnhapi.com/v1/songs/";
+const SONG_API = "https://acnhapi.com/v1/songs/";
 
 // Global songs JS object
 let songs = {};
