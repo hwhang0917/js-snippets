@@ -91,9 +91,14 @@
        - Bug Fix: Safari Mobile에서 click 이벤트를 발생시키지 않는 오류 수정
          - Void(0) onclick 이벤트 발생으로 해결
 
-     - <i>0.7.3 이후~~</i>
+     - <i>0.7.3 업데이트 진행</i>
 
        - API 개선을 위하여 일시적으로 지원 중단
+
+     - <i>1.0.0 버전</i>
+
+       - GCP와 AWS는 유지보수 비용 문제로 삭제되었습니다.
+       - [ACNH API](https://acnhapi.com/)라는 오픈 API를 사용하도록 변경
 
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링

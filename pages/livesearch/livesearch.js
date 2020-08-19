@@ -19,8 +19,8 @@ const SONGS_LS = "songs",
 // Time constant
 const WEEK_IN_MS = 604800000;
 
-// JSON API address (Golang hosted in Google Clound Functions)
-const SONG_API = "Error";
+// JSON API address (Update to use ACNHAPI)
+const SONG_API = "http://acnhapi.com/v1/songs/";
 
 // Global songs JS object
 let songs = {};
@@ -121,30 +121,30 @@ const createSongAside = (song) => {
 
   // Song Aside's ID should be song titles for search query
   songAside.id =
-    song.kor_title.toString().toUpperCase() +
-    song.eng_title.toString().toUpperCase();
+    song.name["name-KRko"].toString().toUpperCase() +
+    song.name["name-USen"].toString().toUpperCase();
 
   // Thumbnail
   const thumbnailFig = document.createElement("figure");
   thumbnailFig.className = "song-thumbnail";
-  thumbnailFig.id = song.id;
+  thumbnailFig.id = song["file-name"];
   const thumbnailImg = document.createElement("img");
   thumbnailImg.setAttribute("draggable", false);
   const playButton = document.createElement("h1");
   playButton.textContent = "▶";
   playButton.className = "play-button";
-  thumbnailImg.src = song.thumbnail;
+  thumbnailImg.src = song["image_uri"];
   thumbnailFig.appendChild(thumbnailImg);
   thumbnailFig.appendChild(playButton);
   songAside.appendChild(thumbnailFig);
 
   // Titles
   const korTitle = document.createElement("h3");
-  korTitle.textContent = song.kor_title;
+  korTitle.textContent = song.name["name-KRko"];
   korTitle.className = "kor-title";
   songAside.appendChild(korTitle);
   const engTitle = document.createElement("p");
-  engTitle.textContent = song.eng_title;
+  engTitle.textContent = song.name["name-USen"];
   engTitle.className = "eng-title";
   songAside.appendChild(engTitle);
 
@@ -152,12 +152,13 @@ const createSongAside = (song) => {
 };
 
 // Populate (fill) DOM with JSON songs
-const fillSongs = (songs) => {
+const fillSongs = (data) => {
+  const songs = Object.entries(data);
   return new Promise((resolve, reject) => {
     jsLoading.style.display = "none";
     if (songs) {
       // For loop songs into MVP CSS aside tag element
-      songs.forEach((song) => {
+      songs.forEach(([_, song]) => {
         root.appendChild(createSongAside(song));
       });
       resolve(songs);
@@ -193,27 +194,18 @@ const populateModal = (clickedSong) => {
   // default autoplay boolean
   const autoplay = true;
 
-  // FLAC source
-  const aircheckSrc = clickedSong["music"]["aircheck"];
-  const liveSrc = clickedSong["music"]["live"];
+  // Audio source
+  const audioSrc = clickedSong["music_uri"];
 
-  // Create aircheck figure
-  const airCheckFig = document.createElement("figure");
-  const airCheckCaption = document.createElement("figcaption");
-  airCheckCaption.textContent = "Air Check";
-  airCheckFig.appendChild(airCheckCaption);
-  airCheckFig.appendChild(createAudio(aircheckSrc, autoplay));
-
-  // Create live figure
-  const liveFig = document.createElement("figure");
-  const liveCaption = document.createElement("figcaption");
-  liveCaption.textContent = "Live";
-  liveFig.appendChild(liveCaption);
-  liveFig.appendChild(createAudio(liveSrc));
+  // Create audio figure
+  const audioFig = document.createElement("figure");
+  const audioCaption = document.createElement("figcaption");
+  audioCaption.textContent = "Music";
+  audioFig.appendChild(audioCaption);
+  audioFig.appendChild(createAudio(audioSrc, autoplay));
 
   // Append music to modal
-  jsModalRoot.appendChild(airCheckFig);
-  jsModalRoot.appendChild(liveFig);
+  jsModalRoot.appendChild(audioFig);
 };
 
 // Clear DOM modal element
@@ -223,17 +215,18 @@ const clearModal = () => {
 
 // Handles click event for thumbnail
 const handleThumbnailClick = (event) => {
+  const data = Object.entries(songs);
   let songID = event.path[1].id;
 
   // Get clicked song
   let clickedSong = {};
-  for (let i = 0; i < songs.length; i++) {
-    if (songs[i].id === songID) {
-      clickedSong = songs[i];
+  for (let i = 0; i < data.length; i++) {
+    if (data[i][0] === songID) {
+      clickedSong = data[i][1];
     }
   }
   // Set Song Tilte
-  jsSongTitle.textContent = clickedSong["kor_title"];
+  jsSongTitle.textContent = clickedSong.name["name-KRko"];
 
   // Populate modal with given video
   populateModal(clickedSong);
