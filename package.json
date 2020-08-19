@@ -9,6 +9,6 @@
     "sass": "^1.26.10"
   },
   "scripts": {
-    "start": "parcel pages/click-and-load/src/index.html -d pages/click-and-load"
+    "start": "parcel pages/click-and-load/src/index.html -d pages/click-and-load --public-url ."
   }
 }

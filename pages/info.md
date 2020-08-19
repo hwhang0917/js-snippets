@@ -150,6 +150,10 @@
 
        - Parcel을 이용하여 번들
 
+     - <i>1.0.1 버전</i>
+
+       - Hotfix: Parcel public-url 오류 수정
+
 ---
 
 ## 각주
