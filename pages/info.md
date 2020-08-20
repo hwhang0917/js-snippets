@@ -100,6 +100,10 @@
        - GCP와 AWS는 유지보수 비용 문제로 삭제되었습니다.
        - [ACNH API](https://acnhapi.com/)라는 오픈 API를 사용하도록 변경
 
+     - <i>1.1.0 버전</i>
+
+       - 이미지 썸네일 figure -> div으로 변경
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체

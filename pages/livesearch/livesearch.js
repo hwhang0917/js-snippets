@@ -125,7 +125,7 @@ const createSongAside = (song) => {
     song.name["name-USen"].toString().toUpperCase();
 
   // Thumbnail
-  const thumbnailFig = document.createElement("figure");
+  const thumbnailFig = document.createElement("div");
   thumbnailFig.className = "song-thumbnail";
   thumbnailFig.id = song["file-name"];
   const thumbnailImg = document.createElement("img");
