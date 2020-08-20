@@ -159,6 +159,10 @@
 
        - Hotfix: Parcel public-url 오류 수정
 
+     - <i>1.1.0 버전</i>
+
+       - Back 링크 추가
+
 ---
 
 ## 각주

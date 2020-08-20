@@ -233,4 +233,18 @@ body {
   cursor: default;
 }
 
+.home-link {
+  position: fixed;
+  top: 20px;
+  left: 300px;
+  color: inherit;
+  text-decoration: none;
+  transition: 0.2s ease-in-out;
+}
+
+.home-link:hover {
+  text-decoration: none;
+  transform: scale(1.2);
+}
+
 /*# sourceMappingURL=style.a6dae8f7.css.map */

@@ -127,15 +127,15 @@ exports.files = void 0;
 var files = [{
   id: 1,
   name: "Nature.mp4",
-  timeLeft: 20
+  timeLeft: 60
 }, {
   id: 2,
   name: "Intro movie.mp4",
-  timeLeft: 11
+  timeLeft: 33
 }, {
   id: 3,
   name: "Asset.mp4",
-  timeLeft: 7
+  timeLeft: 12
 }];
 exports.files = files;
 },{}],"js/eventHandlers.js":[function(require,module,exports) {
@@ -499,7 +499,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "12973" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "11533" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
