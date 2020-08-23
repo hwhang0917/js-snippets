@@ -114,6 +114,7 @@
      - [x] 실시간 크롤링 & Faster 크롤링 w/ Go
      - [x] localstorage에 시간을 지정해 저장 및 불러오기
      - [x] Repl.it이 아닌 AWS Lambda 또는 다른 클라우드에 API 서버 옮기기 (Google Cloud Function에 배포)
+     - [ ] Parcel을 이용하여 코드 리팩토링
 
 2. <h3 id="p2"> 한글 글자 카운터 및 통계 </h3>
 

@@ -9,7 +9,9 @@
     "sass": "^1.26.10"
   },
   "scripts": {
+    "start": "parcel pages/acnh-clock/src/index.html -d pages/acnh-clock",
     "build:clickandload": "parcel pages/click-and-load/src/index.html -d pages/click-and-load --public-url .",
-    "build:livesearch": "parcel pages/livesearch/src/index.html -d pages/livesearch --public-url ."
+    "build:livesearch": "parcel pages/livesearch/src/index.html -d pages/livesearch --public-url .",
+    "build:acnhclock": "parcel pages/acnh-clock/src/index.html -d pages/acnh-clock --public-url ."
   }
 }
