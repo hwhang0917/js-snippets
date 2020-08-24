@@ -4691,6 +4691,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // DOM elements
 const jsInput = document.getElementById("jsSearchInput"),
+      jsForm = document.getElementById("jsForm"),
       modalCloseBtn = document.getElementById("modalCloseBtn"),
       loading = document.getElementById("jsLoading"),
       errorBar = document.getElementById("jsError"); // Root DOM element where song thumbnails go
@@ -4727,6 +4728,7 @@ function init() {
   }).finally(() => loading.style.display = "none"); // Hide loading bar
   // Add event listeners
 
+  jsForm.addEventListener("submit", e => e.preventDefault());
   jsInput.addEventListener("input", handleInput);
   modalCloseBtn.addEventListener("click", _modal.handleModalClose);
 }
@@ -4760,7 +4762,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3280" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3479" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

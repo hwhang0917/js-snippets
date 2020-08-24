@@ -4,6 +4,7 @@ import Song from "./Components/Song";
 
 // DOM elements
 const jsInput = document.getElementById("jsSearchInput"),
+  jsForm = document.getElementById("jsForm"),
   modalCloseBtn = document.getElementById("modalCloseBtn"),
   loading = document.getElementById("jsLoading"),
   errorBar = document.getElementById("jsError");
@@ -41,6 +42,7 @@ function init() {
     .finally(() => (loading.style.display = "none")); // Hide loading bar
 
   // Add event listeners
+  jsForm.addEventListener("submit", (e) => e.preventDefault());
   jsInput.addEventListener("input", handleInput);
   modalCloseBtn.addEventListener("click", handleModalClose);
 }
