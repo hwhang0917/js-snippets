@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css">
-    <link rel="stylesheet" href="/style.a6dae8f7.css">
-    <link rel="shortcut icon" href="/favicon.26242483.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.a6dae8f7.css">
+    <link rel="shortcut icon" href="favicon.26242483.ico" type="image/x-icon">
     <title>Live Search</title>
-  <script src="/style.a6dae8f7.js"></script></head>
+  <script src="style.a6dae8f7.js"></script></head>
   <body>
     <header>
       <nav>
@@ -33,24 +33,7 @@
     </header>
     <main class="main">
       <section id="root">
-        <aside class="song-card" id="KORTITLE">
-          <div class="song-thumbnail" id="mjk_Keiji">
-            <img src="https://acnhapi.com/v1/images/songs/1" draggable="false" class="1">
-            <i class="fas fa-play" id="1"></i>
-          </div>
-          <h3 class="kor-title">한글 제목</h3>
-          <p class="eng-title">English Title</p>
-        </aside>
-        <aside class="song-card" id="KORTITL2E">
-          <div class="song-thumbnail" id="mjk_Keiji3">
-            <img src="https://acnhapi.com/v1/images/songs/2" draggable="false" class="2">
-            <i class="fas fa-play" id="2"></i>
-          </div>
-          <h3 class="kor-title">한글 제목</h3>
-          <p class="eng-title">English Title</p>
-        </aside>
-
-        <!-- <div class="loading-container" id="jsLoading">
+        <div class="loading-container" id="jsLoading">
           <div class="lds-ring">
             <div></div>
             <div></div>
@@ -60,7 +43,16 @@
           <h2 class="loading-message">
             노래를 불러오는 중입니다. 잠시만 기다려주세요.
           </h2>
-        </div> -->
+        </div>
+        <div class="error-box" id="jsError">
+          <i class="fas fa-exclamation-circle"></i>
+          <h2 class="error-title">[오류 발생] 뭔가가 잘못됐습니다!</h2>
+          <h2 class="error-msg"></h2>
+          <p class="error-mail">
+            <a type="mail" href="mailto:hwhang0917@gmail.com">[관리자]</a>
+            에게 문의하세요.
+          </p>
+        </div>
       </section>
     </main>
     <div class="modal" id="jsModal">
@@ -68,6 +60,24 @@
         <i class="fas fa-times" id="modalCloseBtn"></i>
       </div>
       <div class="modal__content" id="modalContentBox">
+        <div class="loading-container" id="modalLoading">
+          <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <section id="modalSection">
+          <aside>
+            <figure>
+              <img src="https://acnhapi.com/v1/images/songs/1" alt="" id="modalImg">
+            </figure>
+            <h3 class="modal-title" id="modalTitle">타이틀</h3>
+            <p>구매가격: <span id="buyPrice">5000</span></p>
+            <p>판매가격: <span id="sellPrice">5000</span></p>
+          </aside>
+        </section>
         <audio src="https://acnhapi.com/v1/music/1" id="player"></audio>
       </div>
     </div>
@@ -94,7 +104,6 @@
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/3b255314a2.js" crossorigin="anonymous"></script>
     <!-- Live Search JS -->
-    <!-- <script src="livesearch.js"></script> -->
-    <script src="/js.00a46daa.js"></script>
+    <script src="js.00a46daa.js"></script>
   </body>
 </html>

@@ -1,0 +1,16 @@
+.error-box {
+  text-align: center;
+  color: rgba(50, 50, 50);
+  display: none;
+
+  i {
+    font-size: 5em;
+  }
+  .error-title {
+    font-size: 2em;
+  }
+  .error-msg {
+    font-size: 1em;
+    margin: 0;
+  }
+}

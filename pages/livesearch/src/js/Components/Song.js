@@ -1,3 +1,5 @@
+const { handleModalOpen } = require("../modal");
+
 const Song = (song) => {
   const $Aside = document.createElement("aside");
   $Aside.className = "song-card";
@@ -15,10 +17,12 @@ const Song = (song) => {
   $Image.setAttribute("draggable", false);
   const $h1 = document.createElement("h1");
   $h1.textContent = "▶";
-  $h1.className = "play-button";
+  $h1.className = song.id;
   $Image.src = song["image_uri"];
+  $Image.id = song.id;
   $Figure.appendChild($Image);
   $Figure.appendChild($h1);
+  $Figure.addEventListener("click", handleModalOpen);
   $Aside.appendChild($Figure);
 
   // Titles
@@ -33,3 +37,5 @@ const Song = (song) => {
 
   return $Aside;
 };
+
+export default Song;

@@ -50,16 +50,13 @@
     transform: rotate(360deg);
   }
 }
-body {
-  position: relative;
-}
 body .modal {
-  position: absolute;
+  position: fixed;
+  padding-bottom: 50px;
   width: 70vw;
-  height: 50vh;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -50%);
   background: white;
   display: grid;
   place-items: center;
@@ -72,6 +69,7 @@ body .modal {
 body .modal .modal__close {
   width: 95%;
   display: flex;
+  font-size: 1.5em;
   justify-content: flex-end;
 }
 body .modal .modal__close i {
@@ -84,6 +82,28 @@ body .modal .modal__content {
   display: grid;
   place-items: center;
 }
+body .modal .modal__content section {
+  display: none;
+}
+body .modal .modal__content section aside .modal-title {
+  font-size: 1.5em;
+}
+body .modal .modal__content section aside p {
+  display: flex;
+  font-weight: 600;
+}
+body .modal .modal__content section aside p span {
+  margin-left: 10px;
+  font-weight: 200;
+}
+body .modal .modal__content section aside p::after {
+  content: "";
+  background-image: url("https://www.mariowiki.com/images/b/bb/Bell_MK8.png");
+  background-size: 25px 25px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
 body .is-open {
   z-index: 10;
   opacity: 1;
@@ -94,19 +114,20 @@ body .is-open {
   cursor: pointer;
   user-select: none;
 }
-.song-card .song-thumbnail i {
+.song-card .song-thumbnail h1 {
+  all: unset;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 5em;
+  font-size: 6em;
   color: #fff;
   opacity: 0;
 }
 .song-card .song-thumbnail:hover > img {
   filter: brightness(50%);
 }
-.song-card .song-thumbnail:hover > i {
+.song-card .song-thumbnail:hover > h1 {
   opacity: 1;
 }
 .song-card .kor-title {
@@ -114,6 +135,22 @@ body .is-open {
   margin-bottom: 15px;
 }
 .song-card .eng-title {
+  margin: 0;
+}
+
+.error-box {
+  text-align: center;
+  color: #323232;
+  display: none;
+}
+.error-box i {
+  font-size: 5em;
+}
+.error-box .error-title {
+  font-size: 2em;
+}
+.error-box .error-msg {
+  font-size: 1em;
   margin: 0;
 }
 
@@ -184,4 +221,4 @@ main .loading-container {
   user-select: none;
 }
 
-/*# sourceMappingURL=/style.a6dae8f7.css.map */
+/*# sourceMappingURL=style.a6dae8f7.css.map */

@@ -1,13 +1,36 @@
 import Plyr from "plyr";
+import { getSong } from "./api";
 const modal = document.getElementById("jsModal");
-const player = new Plyr("#player");
+const modalSection = document.getElementById("modalSection");
+const modalLoading = document.getElementById("modalLoading");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const buyPrice = document.getElementById("buyPrice");
+const sellPrice = document.getElementById("sellPrice");
+const player = new Plyr("#player", { autoplay: true });
+
+const populateModal = (id) => {
+  getSong(id)
+    .then((song) => {
+      modalImg.src = `https://acnhapi.com/v1/images/songs/${song.id}`;
+      modalTitle.innerText = song.name["name-KRko"];
+      song["buy-price"]
+        ? (buyPrice.innerText = song["buy-price"])
+        : (buyPrice.innerText = "비매품");
+
+      sellPrice.innerText = song["sell-price"];
+      modalSection.style.display = "block";
+    })
+    .finally(() => {
+      modalLoading.style.display = "none";
+    });
+};
 
 export const handleModalClose = () => {
   modal.classList.remove("is-open");
-  player.source = {
-    type: "audio",
-    sources: [],
-  };
+  modalLoading.style.display = "block";
+  modalSection.style.display = "none";
+  player.stop();
 };
 
 export const handleModalOpen = ({ target }) => {
@@ -28,5 +51,7 @@ export const handleModalOpen = ({ target }) => {
       },
     ],
   };
+
+  populateModal(song.id);
   modal.classList.add("is-open");
 };

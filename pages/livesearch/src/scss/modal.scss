@@ -1,12 +1,12 @@
 body {
-  position: relative;
+  // position: relative;
   .modal {
-    position: absolute;
+    position: fixed;
+    padding-bottom: 50px;
     width: 70vw;
-    height: 50vh;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -70%);
+    transform: translate(-50%, -50%);
     background: white;
     display: grid;
     place-items: center;
@@ -20,6 +20,7 @@ body {
     .modal__close {
       width: 95%;
       display: flex;
+      font-size: 1.5em;
       justify-content: flex-end;
       i {
         cursor: pointer;
@@ -31,6 +32,31 @@ body {
     .modal__content {
       display: grid;
       place-items: center;
+
+      section {
+        display: none;
+        aside {
+          .modal-title {
+            font-size: 1.5em;
+          }
+          p {
+            display: flex;
+            font-weight: 600;
+            span {
+              margin-left: 10px;
+              font-weight: 200;
+            }
+            &::after {
+              content: "";
+              background-image: url("https://www.mariowiki.com/images/b/bb/Bell_MK8.png");
+              background-size: 25px 25px;
+              display: inline-block;
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+      }
     }
   }
 

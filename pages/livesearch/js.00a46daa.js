@@ -4531,6 +4531,36 @@ var global = arguments[3];
 
   return Lt.defaults = (It = ot, JSON.parse(JSON.stringify(It))), Lt;
 });
+},{}],"js/api.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getSong = exports.getSongs = void 0;
+const API = "https://acnhapi.com/v1/songs/";
+
+const getSongs = async () => {
+  try {
+    const response = await fetch(API);
+    return response.json();
+  } catch (error) {
+    return error;
+  }
+};
+
+exports.getSongs = getSongs;
+
+const getSong = async id => {
+  try {
+    const response = await fetch(API + id);
+    return response.json();
+  } catch (error) {
+    return error;
+  }
+};
+
+exports.getSong = getSong;
 },{}],"js/modal.js":[function(require,module,exports) {
 "use strict";
 
@@ -4541,24 +4571,46 @@ exports.handleModalOpen = exports.handleModalClose = void 0;
 
 var _plyr = _interopRequireDefault(require("plyr"));
 
+var _api = require("./api");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var modal = document.getElementById("jsModal");
-var player = new _plyr.default("#player");
+const modal = document.getElementById("jsModal");
+const modalSection = document.getElementById("modalSection");
+const modalLoading = document.getElementById("modalLoading");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const buyPrice = document.getElementById("buyPrice");
+const sellPrice = document.getElementById("sellPrice");
+const player = new _plyr.default("#player", {
+  autoplay: true
+});
 
-var handleModalClose = function handleModalClose() {
+const populateModal = id => {
+  (0, _api.getSong)(id).then(song => {
+    modalImg.src = "https://acnhapi.com/v1/images/songs/".concat(song.id);
+    modalTitle.innerText = song.name["name-KRko"];
+    song["buy-price"] ? buyPrice.innerText = song["buy-price"] : buyPrice.innerText = "비매품";
+    sellPrice.innerText = song["sell-price"];
+    modalSection.style.display = "block";
+  }).finally(() => {
+    modalLoading.style.display = "none";
+  });
+};
+
+const handleModalClose = () => {
   modal.classList.remove("is-open");
-  player.source = {
-    type: "audio",
-    sources: []
-  };
+  modalLoading.style.display = "block";
+  modalSection.style.display = "none";
+  player.stop();
 };
 
 exports.handleModalClose = handleModalClose;
 
-var handleModalOpen = function handleModalOpen(_ref) {
-  var target = _ref.target;
-  var song = {
+const handleModalOpen = ({
+  target
+}) => {
+  const song = {
     id: 0
   };
 
@@ -4575,31 +4627,85 @@ var handleModalOpen = function handleModalOpen(_ref) {
       type: "audio/mp3"
     }]
   };
+  populateModal(song.id);
   modal.classList.add("is-open");
 };
 
 exports.handleModalOpen = handleModalOpen;
-},{"plyr":"../../../node_modules/plyr/dist/plyr.min.js"}],"js/index.js":[function(require,module,exports) {
+},{"plyr":"../../../node_modules/plyr/dist/plyr.min.js","./api":"js/api.js"}],"js/Components/Song.js":[function(require,module,exports) {
 "use strict";
 
-var _plyr = _interopRequireDefault(require("plyr"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+const {
+  handleModalOpen
+} = require("../modal");
+
+const Song = song => {
+  const $Aside = document.createElement("aside");
+  $Aside.className = "song-card"; // Song Aside's ID should be song titles for search query
+
+  $Aside.id = song.name["name-KRko"].toString().toUpperCase() + song.name["name-USen"].toString().toUpperCase(); // Thumbnail
+
+  const $Figure = document.createElement("div");
+  $Figure.className = "song-thumbnail";
+  $Figure.id = song["file-name"];
+  const $Image = document.createElement("img");
+  $Image.setAttribute("draggable", false);
+  const $h1 = document.createElement("h1");
+  $h1.textContent = "▶";
+  $h1.className = song.id;
+  $Image.src = song["image_uri"];
+  $Image.id = song.id;
+  $Figure.appendChild($Image);
+  $Figure.appendChild($h1);
+  $Figure.addEventListener("click", handleModalOpen);
+  $Aside.appendChild($Figure); // Titles
+
+  const $h3 = document.createElement("h3");
+  $h3.textContent = song.name["name-KRko"];
+  $h3.className = "kor-title";
+  $Aside.appendChild($h3);
+  const $p = document.createElement("p");
+  $p.textContent = song.name["name-USen"];
+  $p.className = "eng-title";
+  $Aside.appendChild($p);
+  return $Aside;
+};
+
+var _default = Song;
+exports.default = _default;
+},{"../modal":"js/modal.js"}],"js/index.js":[function(require,module,exports) {
+"use strict";
 
 var _modal = require("./modal");
+
+var _api = require("./api");
+
+var _Song = _interopRequireDefault(require("./Components/Song"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // DOM elements
-var jsInput = document.getElementById("jsSearchInput"),
-    modalCloseBtn = document.getElementById("modalCloseBtn"); // Root DOM element where song thumbnails go
+const jsInput = document.getElementById("jsSearchInput"),
+      modalCloseBtn = document.getElementById("modalCloseBtn"),
+      loading = document.getElementById("jsLoading"),
+      errorBar = document.getElementById("jsError"); // Root DOM element where song thumbnails go
 
-var root = document.getElementById("root");
+const root = document.getElementById("root");
 
-var handleInput = function handleInput(_ref) {
-  var value = _ref.target.value;
-  var query = value.toUpperCase();
-  var songCards = document.getElementsByClassName("song-card");
+const handleInput = ({
+  target: {
+    value
+  }
+}) => {
+  let query = value.toUpperCase();
+  const songCards = document.getElementsByClassName("song-card");
 
-  for (var i = 0; i < songCards.length; i++) {
+  for (let i = 0; i < songCards.length; i++) {
     if (songCards[i].id.indexOf(query) > -1) {
       songCards[i].style.display = "";
     } else {
@@ -4609,12 +4715,24 @@ var handleInput = function handleInput(_ref) {
 };
 
 function init() {
+  (0, _api.getSongs)() // Get songs promise
+  .then(data => {
+    const songs = Object.entries(data).map(item => item[1]); // Get Array of song objects from data
+
+    return songs;
+  }).then(songs => songs.forEach(song => {
+    root.appendChild((0, _Song.default)(song)); // Populate DOM with song cars
+  })).catch(() => {
+    errorBar.style.display = "block"; // Show Error Block
+  }).finally(() => loading.style.display = "none"); // Hide loading bar
+  // Add event listeners
+
   jsInput.addEventListener("input", handleInput);
   modalCloseBtn.addEventListener("click", _modal.handleModalClose);
 }
 
 init();
-},{"plyr":"../../../node_modules/plyr/dist/plyr.min.js","./modal":"js/modal.js"}],"../../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./modal":"js/modal.js","./api":"js/api.js","./Components/Song":"js/Components/Song.js"}],"../../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -4642,7 +4760,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8392" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3068" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -4819,4 +4937,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../node_modules/parcel/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+//# sourceMappingURL=js.00a46daa.js.map

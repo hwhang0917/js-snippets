@@ -3,12 +3,13 @@
     position: relative;
     cursor: pointer;
     user-select: none;
-    i {
+    h1 {
+      all: unset;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 5em;
+      font-size: 6em;
       color: #fff;
       opacity: 0;
     }
@@ -16,7 +17,7 @@
     &:hover > img {
       filter: brightness(50%);
     }
-    &:hover > i {
+    &:hover > h1 {
       opacity: 1;
     }
   }

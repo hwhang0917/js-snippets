@@ -14,5 +14,13 @@
     "build:clickandload": "parcel pages/click-and-load/src/index.html -d pages/click-and-load --public-url .",
     "build:livesearch": "parcel pages/livesearch/src/index.html -d pages/livesearch --public-url .",
     "build:acnhclock": "parcel pages/acnh-clock/src/index.html -d pages/acnh-clock --public-url ."
-  }
+  },
+  "devDependencies": {},
+  "browserslist": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions",
+    "last 3 opera versions",
+    "last 3 ios_saf versions",
+    "last 3 safari versions"
+  ]
 }

@@ -108,6 +108,13 @@
 
        - parcel로 번들
 
+     - <i>1.3.0 버전</i>
+
+       - 코드 리팩토링 / 가독성 개선
+       - CSS 스타일 SCSS로 리팩토링
+       - [Plyr](https://github.com/sampotts/plyr) 오디오 플레이어 추가
+       - 모달 내 곡 정보 추가
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
