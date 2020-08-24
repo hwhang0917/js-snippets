@@ -26,6 +26,11 @@ const handleInput = ({ target: { value } }) => {
 };
 
 function init() {
+  // Add event listeners
+  jsForm.addEventListener("submit", (e) => e.preventDefault());
+  jsInput.addEventListener("input", handleInput);
+  modalCloseBtn.addEventListener("click", handleModalClose);
+
   getSongs() // Get songs promise
     .then((data) => {
       const songs = Object.entries(data).map((item) => item[1]); // Get Array of song objects from data
@@ -40,11 +45,6 @@ function init() {
       errorBar.style.display = "block"; // Show Error Block
     })
     .finally(() => (loading.style.display = "none")); // Hide loading bar
-
-  // Add event listeners
-  jsForm.addEventListener("submit", (e) => e.preventDefault());
-  jsInput.addEventListener("input", handleInput);
-  modalCloseBtn.addEventListener("click", handleModalClose);
 }
 
 init();

@@ -4716,6 +4716,10 @@ const handleInput = ({
 };
 
 function init() {
+  // Add event listeners
+  jsForm.addEventListener("submit", e => e.preventDefault());
+  jsInput.addEventListener("input", handleInput);
+  modalCloseBtn.addEventListener("click", _modal.handleModalClose);
   (0, _api.getSongs)() // Get songs promise
   .then(data => {
     const songs = Object.entries(data).map(item => item[1]); // Get Array of song objects from data
@@ -4726,11 +4730,6 @@ function init() {
   })).catch(() => {
     errorBar.style.display = "block"; // Show Error Block
   }).finally(() => loading.style.display = "none"); // Hide loading bar
-  // Add event listeners
-
-  jsForm.addEventListener("submit", e => e.preventDefault());
-  jsInput.addEventListener("input", handleInput);
-  modalCloseBtn.addEventListener("click", _modal.handleModalClose);
 }
 
 init();
@@ -4762,7 +4761,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3479" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3879" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
