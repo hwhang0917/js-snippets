@@ -4,86 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-    <link rel="stylesheet" href="styles.8986bff4.css">
-    <link rel="shortcut icon" href="favicon.26242483.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css">
+    <link rel="stylesheet" href="/style.a6dae8f7.css">
+    <link rel="shortcut icon" href="/favicon.26242483.ico" type="image/x-icon">
     <title>Live Search</title>
-  <script src="styles.8986bff4.js"></script></head>
+  <script src="/style.a6dae8f7.js"></script></head>
   <body>
-    <div onclick="void(0);">
-      <header>
-        <nav>
-          <a href="https://hwhang0917.github.io/js-snippets/" class="home-link">↩ Back</a>
-          <a href="https://github.com/hwhang0917/js-snippets/blob/master/pages/info.md">개발 로그</a>
-        </nav>
-        <section>
-          <heading>
-            <h1>모여봐요 동물의 숲 노래 라이브러리</h1>
-          </heading>
-        </section>
-        <section>
-          <form id="jsForm">
-            <div class="search-desc"></div>
-            <div class="input-container">
-              <i class="fas fa-search"></i>
-              <input type="text" name="songtitle" id="jsSearchInput" class="search-input" placeholder="노래 제목 검색...">
-            </div>
-          </form>
-        </section>
-        <hr>
-      </header>
-      <main class="main">
-        <!-- <p>
-          <small>
-            * 현재 새로운 버전 개발을 위해 페이지 지원 중단 상태입니다.
-          </small>
-        </p> -->
-        <section id="root">
-          <div class="loading-container" id="jsLoading">
-            <div class="lds-ring">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-            <h2 class="loading-message">
-              노래를 가져오는 중입니다. 잠시만 기다려주세요.
-            </h2>
+    <header>
+      <nav>
+        <a href="https://hwhang0917.github.io/js-snippets/" class="home-link">↩ Back</a>
+        <a href="https://github.com/hwhang0917/js-snippets/blob/master/pages/info.md">개발 로그</a>
+      </nav>
+      <section>
+        <heading>
+          <h1>모여봐요 동물의 숲 노래 라이브러리</h1>
+        </heading>
+      </section>
+      <section>
+        <form>
+          <div class="search-desc"></div>
+          <div class="input-container">
+            <i class="fas fa-search"></i>
+            <input type="text" name="songtitle" id="jsSearchInput" class="search-input" placeholder="노래 제목 검색...">
           </div>
-        </section>
-      </main>
-      <div class="modal" id="jsModal">
-        <div class="modal__content">
-          <span class="close-btn" id="jsCloseBtn">&times;</span>
-          <header>
-            <h2 id="jsSongTitle"></h2>
-          </header>
-          <section class="music_container" id="jsModalRoot"></section>
-        </div>
+        </form>
+      </section>
+      <hr>
+    </header>
+    <main class="main">
+      <section id="root">
+        <aside class="song-card" id="KORTITLE">
+          <div class="song-thumbnail" id="mjk_Keiji">
+            <img src="https://acnhapi.com/v1/images/songs/1" draggable="false" class="1">
+            <i class="fas fa-play" id="1"></i>
+          </div>
+          <h3 class="kor-title">한글 제목</h3>
+          <p class="eng-title">English Title</p>
+        </aside>
+        <aside class="song-card" id="KORTITL2E">
+          <div class="song-thumbnail" id="mjk_Keiji3">
+            <img src="https://acnhapi.com/v1/images/songs/2" draggable="false" class="2">
+            <i class="fas fa-play" id="2"></i>
+          </div>
+          <h3 class="kor-title">한글 제목</h3>
+          <p class="eng-title">English Title</p>
+        </aside>
+
+        <!-- <div class="loading-container" id="jsLoading">
+          <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h2 class="loading-message">
+            노래를 불러오는 중입니다. 잠시만 기다려주세요.
+          </h2>
+        </div> -->
+      </section>
+    </main>
+    <div class="modal" id="jsModal">
+      <div class="modal__close">
+        <i class="fas fa-times" id="modalCloseBtn"></i>
       </div>
-      <footer>
-        <hr>
-        <section>
-          <small>
-            <span>CSS 베이스: </span>
-            <a href="https://andybrewer.github.io/mvp/">MVP CSS</a>
-            <span><strong>·</strong></span>
-            <span>아이콘: </span>
-            <a href="https://fontawesome.com/">Font Awesome</a>
-            <span><strong>·</strong></span>
-            <span>데이터: </span>
-            <a href="https://acnhapi.com/">ACNH API</a><span><strong>·</strong></span>
-            <span>폰트: </span>
-            <a href="https://noonnu.cc/">눈누</a>
-            <span><strong>·</strong></span>
-            <span>로딩 아이콘: </span>
-            <a href="https://loading.io/css/">Loading.io</a>
-          </small>
-        </section>
-      </footer>
-      <!-- Fontawesome -->
-      <script src="https://kit.fontawesome.com/3b255314a2.js" crossorigin="anonymous"></script>
-      <!-- Live Search JS -->
-      <script src="livesearch.eea1b4f0.js"></script>
+      <div class="modal__content" id="modalContentBox">
+        <audio src="https://acnhapi.com/v1/music/1" id="player"></audio>
+      </div>
     </div>
+    <footer>
+      <hr>
+      <section>
+        <small>
+          <span>CSS 베이스: </span>
+          <a href="https://andybrewer.github.io/mvp/">MVP CSS</a>
+          <span><strong>·</strong></span>
+          <span>아이콘: </span>
+          <a href="https://fontawesome.com/">Font Awesome</a>
+          <span><strong>·</strong></span>
+          <span>데이터: </span>
+          <a href="https://acnhapi.com/">ACNH API</a><span><strong>·</strong></span>
+          <span>폰트: </span>
+          <a href="https://noonnu.cc/">눈누</a>
+          <span><strong>·</strong></span>
+          <span>로딩 아이콘: </span>
+          <a href="https://loading.io/css/">Loading.io</a>
+        </small>
+      </section>
+    </footer>
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/3b255314a2.js" crossorigin="anonymous"></script>
+    <!-- Live Search JS -->
+    <!-- <script src="livesearch.js"></script> -->
+    <script src="/js.00a46daa.js"></script>
   </body>
 </html>

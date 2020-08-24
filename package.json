@@ -6,10 +6,11 @@
   "license": "MIT",
   "dependencies": {
     "parcel": "^1.12.4",
+    "plyr": "^3.6.2",
     "sass": "^1.26.10"
   },
   "scripts": {
-    "start": "parcel pages/acnh-clock/src/index.html -d pages/acnh-clock",
+    "start": "parcel pages/livesearch/src/index.html -d pages/livesearch",
     "build:clickandload": "parcel pages/click-and-load/src/index.html -d pages/click-and-load --public-url .",
     "build:livesearch": "parcel pages/livesearch/src/index.html -d pages/livesearch --public-url .",
     "build:acnhclock": "parcel pages/acnh-clock/src/index.html -d pages/acnh-clock --public-url ."

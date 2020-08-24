@@ -1,0 +1,41 @@
+body {
+  position: relative;
+  .modal {
+    position: absolute;
+    width: 70vw;
+    height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    background: white;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    z-index: -1;
+    box-shadow: 0 0 0 100vw rgba(black, 0.4);
+
+    display: grid;
+    grid-template-rows: 50px 1fr;
+
+    .modal__close {
+      width: 95%;
+      display: flex;
+      justify-content: flex-end;
+      i {
+        cursor: pointer;
+        &:active {
+          color: #e74c3c;
+        }
+      }
+    }
+    .modal__content {
+      display: grid;
+      place-items: center;
+    }
+  }
+
+  .is-open {
+    z-index: 10;
+    opacity: 1;
+  }
+}

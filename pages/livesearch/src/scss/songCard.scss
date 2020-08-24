@@ -1,0 +1,31 @@
+.song-card {
+  .song-thumbnail {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 5em;
+      color: #fff;
+      opacity: 0;
+    }
+
+    &:hover > img {
+      filter: brightness(50%);
+    }
+    &:hover > i {
+      opacity: 1;
+    }
+  }
+
+  .kor-title {
+    margin: 0;
+    margin-bottom: 15px;
+  }
+  .eng-title {
+    margin: 0;
+  }
+}

@@ -1,6 +1,4 @@
 import { passWeek } from "./utils";
-// Time constant
-const WEEK_IN_MS = 604800000;
 
 // Local Storage Keys
 const SONGS_LS = "songs",

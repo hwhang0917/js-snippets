@@ -1,3 +1,6 @@
+// Time constant
+const WEEK_IN_MS = 604800000;
+
 // Get current date in format: YYYY-MM-DD
 export const getCurrentDate = () => {
   const date = new Date();
