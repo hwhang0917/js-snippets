@@ -7,7 +7,19 @@ const modalImg = document.getElementById("modalImg");
 const modalTitle = document.getElementById("modalTitle");
 const buyPrice = document.getElementById("buyPrice");
 const sellPrice = document.getElementById("sellPrice");
-const player = new Plyr("#player", { autoplay: true });
+const player = new Plyr("#player", {
+  autoplay: true,
+  loop: { active: true },
+  controls: [
+    "play",
+    "progress",
+    "mute",
+    "volume",
+    "settings",
+    "pip",
+    "airplay",
+  ],
+});
 
 const populateModal = (id) => {
   getSong(id)

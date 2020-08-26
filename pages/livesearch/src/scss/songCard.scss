@@ -3,22 +3,31 @@
     position: relative;
     cursor: pointer;
     user-select: none;
-    h1 {
-      all: unset;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 6em;
-      color: #fff;
-      opacity: 0;
+
+    img {
+      transition-duration: 0.2s;
     }
 
     &:hover > img {
       filter: brightness(50%);
     }
-    &:hover > h1 {
-      opacity: 1;
+
+    // Font Awesome Play Button Pseudo Element
+    &:hover::after {
+      // Position
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      // Font Awesome
+      content: "\f04b";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+
+      // Spec
+      font-size: 4.5em;
+      color: #fff;
     }
   }
 

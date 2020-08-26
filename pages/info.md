@@ -127,13 +127,18 @@
 
        - 모바일 모달 깨짐 수정
 
+     - <i>1.4.0 버전</i>
+
+       - Local Storage 기능 재추가 (1주일 단위로 데이터 가져오기)
+       - 모달, 플레이어 UI 개선
+
    - <b>TODO: </b>
      - [x] 콜백 함수들을 Promise 패턴으로 리팩토링
      - [x] 유튜브 링크를 flac 파일로 대체
      - [x] 실시간 크롤링 & Faster 크롤링 w/ Go
      - [x] localstorage에 시간을 지정해 저장 및 불러오기
      - [x] Repl.it이 아닌 AWS Lambda 또는 다른 클라우드에 API 서버 옮기기 (Google Cloud Function에 배포)
-     - [ ] Parcel을 이용하여 코드 리팩토링
+     - [x] Parcel을 이용하여 코드 리팩토링
 
 2. <h3 id="p2"> 한글 글자 카운터 및 통계 </h3>
 

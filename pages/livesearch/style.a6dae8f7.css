@@ -1,3 +1,10 @@
+@charset "UTF-8";
+*,
+*::after,
+*::before {
+  margin: 0;
+}
+
 @font-face {
   font-family: "NEXON Lv2 Gothic Bold";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Bold.woff") format("woff");
@@ -52,27 +59,29 @@
 }
 body .modal {
   position: fixed;
-  padding-bottom: 50px;
-  width: fit-content;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding-bottom: 50px;
+  width: fit-content;
+  height: auto;
   background: white;
+  border-radius: 2em;
   display: grid;
   place-items: center;
+  grid-template-rows: 50px 1fr;
   opacity: 0;
   z-index: -1;
   box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.4);
-  display: grid;
-  grid-template-rows: 50px 1fr;
 }
 @media only screen and (min-width: 768px) {
   body .modal {
     width: 70vw;
+    height: 90vh;
   }
 }
 body .modal .modal__close {
-  width: 95%;
+  width: 90%;
   display: flex;
   font-size: 1.5em;
   justify-content: flex-end;
@@ -80,7 +89,7 @@ body .modal .modal__close {
 body .modal .modal__close i {
   cursor: pointer;
 }
-body .modal .modal__close i:active {
+body .modal .modal__close i:hover {
   color: #e74c3c;
 }
 body .modal .modal__content {
@@ -119,21 +128,22 @@ body .is-open {
   cursor: pointer;
   user-select: none;
 }
-.song-card .song-thumbnail h1 {
-  all: unset;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 6em;
-  color: #fff;
-  opacity: 0;
+.song-card .song-thumbnail img {
+  transition-duration: 0.2s;
 }
 .song-card .song-thumbnail:hover > img {
   filter: brightness(50%);
 }
-.song-card .song-thumbnail:hover > h1 {
-  opacity: 1;
+.song-card .song-thumbnail:hover::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 4.5em;
+  color: #fff;
 }
 .song-card .kor-title {
   margin: 0;
@@ -217,6 +227,9 @@ header section form input {
   font-family: "MapoFlowerIsland", sans-serif;
 }
 
+main {
+  padding: 0;
+}
 main .loading-container {
   color: #bdc3c7;
   display: flex;

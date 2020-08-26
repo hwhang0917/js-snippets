@@ -4583,7 +4583,11 @@ const modalTitle = document.getElementById("modalTitle");
 const buyPrice = document.getElementById("buyPrice");
 const sellPrice = document.getElementById("sellPrice");
 const player = new _plyr.default("#player", {
-  autoplay: true
+  autoplay: true,
+  loop: {
+    active: true
+  },
+  controls: ["play", "progress", "mute", "volume", "settings", "pip", "airplay"]
 });
 
 const populateModal = id => {
@@ -4632,7 +4636,111 @@ const handleModalOpen = ({
 };
 
 exports.handleModalOpen = handleModalOpen;
-},{"plyr":"../../../node_modules/plyr/dist/plyr.min.js","./api":"js/api.js"}],"js/Components/Song.js":[function(require,module,exports) {
+},{"plyr":"../../../node_modules/plyr/dist/plyr.min.js","./api":"js/api.js"}],"js/livesearch.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.handleInput = void 0;
+
+const handleInput = ({
+  target: {
+    value
+  }
+}) => {
+  let query = value.toUpperCase();
+  const songCards = document.getElementsByClassName("song-card");
+
+  for (let i = 0; i < songCards.length; i++) {
+    if (songCards[i].id.indexOf(query) > -1) {
+      songCards[i].style.display = "";
+    } else {
+      songCards[i].style.display = "none";
+    }
+  }
+};
+
+exports.handleInput = handleInput;
+},{}],"js/utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.passWeek = exports.getCurrentDate = void 0;
+// Time constant
+const WEEK_IN_MS = 604800000; // Get current date in format: YYYY-MM-DD
+
+const getCurrentDate = () => {
+  const date = new Date();
+  return "".concat(date.getFullYear(), "-").concat(date.getMonth() + 1, "-").concat(date.getDate());
+}; // Check if given time has passed week
+
+
+exports.getCurrentDate = getCurrentDate;
+
+const passWeek = timeStr => {
+  const storedTime = Date.parse(timeStr);
+  const currentTime = Date.now();
+
+  if (storedTime + WEEK_IN_MS < currentTime) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+exports.passWeek = passWeek;
+},{}],"js/localStorage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.shouldFetch = exports.getSongsFromLocalStorage = exports.saveSongsInLocalStorage = void 0;
+
+var _utils = require("./utils");
+
+/*
+  Check browser local storage for data, only fetch again if data is more than a week old
+*/
+// Local Storage Keys
+const SONGS_LS = "songs",
+      DATA_GET_TIME = "data_get_time";
+
+const saveSongsInLocalStorage = songs => {
+  localStorage.setItem(SONGS_LS, JSON.stringify(songs));
+  localStorage.setItem(DATA_GET_TIME, (0, _utils.getCurrentDate)());
+};
+
+exports.saveSongsInLocalStorage = saveSongsInLocalStorage;
+
+const getSongsFromLocalStorage = () => {
+  return JSON.parse(localStorage.getItem(SONGS_LS));
+}; //   Check if client should fetch data
+
+
+exports.getSongsFromLocalStorage = getSongsFromLocalStorage;
+
+const shouldFetch = () => {
+  const loadedSongs = localStorage.getItem(SONGS_LS);
+  const loadedStoredTime = localStorage.getItem(DATA_GET_TIME); // Empty local storage
+
+  if (loadedSongs === null || loadedStoredTime === null) {
+    return true;
+  } else {
+    // Scrape data expired week
+    if ((0, _utils.passWeek)(loadedStoredTime)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
+exports.shouldFetch = shouldFetch;
+},{"./utils":"js/utils.js"}],"js/Components/Song.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4655,13 +4763,9 @@ const Song = song => {
   $Figure.id = song["file-name"];
   const $Image = document.createElement("img");
   $Image.setAttribute("draggable", false);
-  const $h1 = document.createElement("h1");
-  $h1.textContent = "▶";
-  $h1.className = song.id;
   $Image.src = song["image_uri"];
   $Image.id = song.id;
   $Figure.appendChild($Image);
-  $Figure.appendChild($h1);
   $Figure.addEventListener("click", handleModalOpen);
   $Aside.appendChild($Figure); // Titles
 
@@ -4685,6 +4789,10 @@ var _modal = require("./modal");
 
 var _api = require("./api");
 
+var _livesearch = require("./livesearch");
+
+var _localStorage = require("./localStorage");
+
 var _Song = _interopRequireDefault(require("./Components/Song"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -4698,42 +4806,38 @@ const jsInput = document.getElementById("jsSearchInput"),
 
 const root = document.getElementById("root");
 
-const handleInput = ({
-  target: {
-    value
-  }
-}) => {
-  let query = value.toUpperCase();
-  const songCards = document.getElementsByClassName("song-card");
-
-  for (let i = 0; i < songCards.length; i++) {
-    if (songCards[i].id.indexOf(query) > -1) {
-      songCards[i].style.display = "";
-    } else {
-      songCards[i].style.display = "none";
-    }
-  }
-};
-
-function init() {
-  // Add event listeners
-  jsForm.addEventListener("submit", e => e.preventDefault());
-  jsInput.addEventListener("input", handleInput);
-  modalCloseBtn.addEventListener("click", _modal.handleModalClose);
+const fetchSongs = () => {
   (0, _api.getSongs)() // Get songs promise
   .then(data => {
     const songs = Object.entries(data).map(item => item[1]); // Get Array of song objects from data
 
+    (0, _localStorage.saveSongsInLocalStorage)(songs);
     return songs;
   }).then(songs => songs.forEach(song => {
     root.appendChild((0, _Song.default)(song)); // Populate DOM with song cars
   })).catch(() => {
     errorBar.style.display = "block"; // Show Error Block
   }).finally(() => loading.style.display = "none"); // Hide loading bar
+};
+
+const getLocalSongs = () => {
+  const songs = (0, _localStorage.getSongsFromLocalStorage)();
+  songs.forEach(song => {
+    root.appendChild((0, _Song.default)(song)); // Populate DOM with song cars
+  });
+  loading.style.display = "none";
+};
+
+function init() {
+  // Add event listeners
+  jsForm.addEventListener("submit", e => e.preventDefault());
+  jsInput.addEventListener("input", _livesearch.handleInput);
+  modalCloseBtn.addEventListener("click", _modal.handleModalClose);
+  (0, _localStorage.shouldFetch)() ? fetchSongs() : getLocalSongs();
 }
 
 init();
-},{"./modal":"js/modal.js","./api":"js/api.js","./Components/Song":"js/Components/Song.js"}],"../../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./modal":"js/modal.js","./api":"js/api.js","./livesearch":"js/livesearch.js","./localStorage":"js/localStorage.js","./Components/Song":"js/Components/Song.js"}],"../../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -4761,7 +4865,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4965" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8824" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

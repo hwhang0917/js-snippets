@@ -15,13 +15,9 @@ const Song = (song) => {
   $Figure.id = song["file-name"];
   const $Image = document.createElement("img");
   $Image.setAttribute("draggable", false);
-  const $h1 = document.createElement("h1");
-  $h1.textContent = "▶";
-  $h1.className = song.id;
   $Image.src = song["image_uri"];
   $Image.id = song.id;
   $Figure.appendChild($Image);
-  $Figure.appendChild($h1);
   $Figure.addEventListener("click", handleModalOpen);
   $Aside.appendChild($Figure);
 

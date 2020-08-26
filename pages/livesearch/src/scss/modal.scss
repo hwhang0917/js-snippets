@@ -1,33 +1,44 @@
 body {
   // position: relative;
   .modal {
+    // Position
     position: fixed;
-    padding-bottom: 50px;
-    width: fit-content;
-    @media only screen and (min-width: 768px) {
-      width: 70vw;
-    }
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    // Size
+    padding-bottom: 50px;
+    width: fit-content;
+    height: auto;
+    @media only screen and (min-width: 768px) {
+      width: 70vw;
+      height: 90vh;
+    }
+    // Style
     background: white;
+    border-radius: 2em;
+
+    // Placing grid box
     display: grid;
     place-items: center;
-    opacity: 0;
-    z-index: -1;
-    box-shadow: 0 0 0 100vw rgba(black, 0.4);
-
-    display: grid;
     grid-template-rows: 50px 1fr;
 
+    // Hidden
+    opacity: 0;
+    z-index: -1;
+
+    // Modal backdrop
+    box-shadow: 0 0 0 100vw rgba(black, 0.4);
+
     .modal__close {
-      width: 95%;
+      width: 90%;
       display: flex;
       font-size: 1.5em;
       justify-content: flex-end;
       i {
         cursor: pointer;
-        &:active {
+        &:hover {
           color: #e74c3c;
         }
       }
